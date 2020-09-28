@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 app.use("/", index);
+
+
 //===========mongoDB Connection==============//
 const connectDB = async () => {
   try {

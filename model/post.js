@@ -179,6 +179,10 @@ const postSchema = new Schema({
       default: null,
     },
   },
+  postedOn: {
+    type: String,
+    default: Date.now(),
+  },
 });
 
 module.exports = mongoose.model("Post", postSchema);
