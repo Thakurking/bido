@@ -10,9 +10,17 @@
   "author": "Bharat Software Systems",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "mongoose": "^5.10.7"
+    "ip": "^1.1.5",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.7",
+    "nodemailer": "^6.4.11",
+    "uuid": "^8.3.0",
+    "validator": "^13.1.17",
+    "validatorjs": "^3.20.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

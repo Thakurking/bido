@@ -1,0 +1,161 @@
+const mongoose = require("mongoose");
+const validator = require("validator");
+const nodemailer = require("nodemailer");
+const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcrypt");
+const ip = require("ip");
+
+//Database tables
+const User = require("../model/user");
+const OTP = require("../model/otp");
+
+//Nodemailer
+let transporter = nodemailer.createTransport({
+  service: process.env.service,
+  auth: {
+    user: process.env.user,
+    pass: process.env.pass,
+  },
+});
+
+//#region User Signup Page
+exports.signup = async (req, res) => {
+  const { name, phone, email, password, cpassword } = req.body;
+  if (!name || !email || !phone || !password || !cpassword) {
+    return res.json({
+      Error: "Please Provide All The Details",
+      isSuccess: false,
+    });
+  }
+  if ((!validator.isMobilePhone(phone), ["en-IN"])) {
+    return res.json({
+      Error: "Please Enter Valid Phone Number",
+      isSuccess: false,
+    });
+  }
+  if (!validator.isEmail(email)) {
+    return res.json({ Error: "Please Enter Valid Email", isSuccess: false });
+  }
+  if (
+    !validator.matches(
+      password,
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/
+    )
+  ) {
+    return res.json({
+      Error:
+        "Password should contain a special character and digit and uppercase",
+      isSuccess: false,
+    });
+  }
+  if (!validator.matches(password, cpassword)) {
+    return res.json({
+      Error: "Password Does Not Match Please Enter Same Password",
+      isSuccess: false,
+    });
+  }
+  const isPhoneExist = await User.findOne({ phone: phone });
+  if (isPhoneExist) {
+    return res.json({
+      Error: "User Already Exist Please Try With Another Phone Number",
+      isSuccess: false,
+    });
+  }
+  const isEmailExist = await User.findOne({ email: email });
+  if (isEmailExist) {
+    return res.json({
+      Error: "User Already Exist Please Try With Another Email",
+      isSuccess: false,
+    });
+  }
+  const otpNum = Math.floor(Math.random() * 10000 + 1);
+  const mailoption = {
+    from: process.env.user,
+    to: email,
+    subject: `Bido Account Verification`,
+    html: `<h1>Account Verification</h1><br><hr>
+            <br><a>Your OTP is: ${otpNum}</a>`,
+  };
+  transporter.sendMail(mailoption, async (err, info) => {
+    if (!err && info !== null) {
+      bcrypt.genSalt(process.env.round, async (err, salt) => {
+        if (!err) {
+          bcrypt.hash(password, salt, async (err, hash) => {
+            if (!err) {
+              const user = new User({
+                email: email,
+                password: hash,
+                phone: phone,
+                name: name,
+                createdBy: req.ip,
+                updatedBy: req.ip,
+                role: "client",
+                referalCode: uuidv4(),
+              });
+              const saveUser = await user.save();
+              const otp = new OTP({
+                userId: saveUser._id,
+                otp: otpNum,
+                usedFor: "account activation",
+              });
+              const saveOTP = await otp.save();
+              if (saveOTP && saveUser) {
+                return res.json({
+                  message: "OTP sent to your email plese verify",
+                  isSuccess: true,
+                  user: saveUser,
+                });
+              } else {
+                return res.json({
+                  Error: "Failed To Save OTP Please Try Again",
+                  isSuccess: false,
+                });
+              }
+            }
+          });
+        }
+      });
+    }
+    return res.json({
+      message: "Cound Not Send OTP PLease Try Again",
+      isSuccess: false,
+    });
+  });
+};
+//#endregion
+
+//#region OTP Verification
+exports.verifyOTP = async (req, res) => {
+  const { otp, userId } = req.body;
+  if (!otp || !userId) {
+    return res.json({ Error: "Please Enter OTP", isSuccess: false });
+  }
+  const isOTP = await OTP.findOne({ userId: userId, otp: otp });
+  if (isOTP) {
+    if (isOTP.status === 1) {
+      const updateOTP = await OTP.updateOne(
+        { userId: userId, otp: otp },
+        { $set: { status: 2 } }
+      );
+      const updateUser = await User.updateOne(
+        { _id: userId },
+        { $set: { status: "Y" } }
+      );
+      if (updateOTP && updateUser) {
+        const user = await User.findOne({ _id: userId });
+        if (user) {
+          return res.json({
+            message: "OTP verified successfully",
+            isSuccess: true,
+            user: user,
+          });
+        }
+      }
+    }
+    if (isOTP.status === 2) {
+      return res.json({ Error: "OTP Already Verified", isSuccess: false });
+    }
+  }
+  return res.json({ Error: "Please Enter Valid OTP", isSuccess: false });
+};
+//#endregion

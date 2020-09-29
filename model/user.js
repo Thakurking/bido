@@ -23,7 +23,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    default: "customer", //Bidder Or Admin
+    default: "client", //Bidder Or Admin
   },
   bankId: {
     type: String,
@@ -35,30 +35,28 @@ const userSchema = new Schema({
   gender: {
     type: String,
   },
-  address: [
-    {
-      state: {
-        type: String,
-        default: null,
-      },
-      city: {
-        type: String,
-        default: null,
-      },
-      PINcode: {
-        type: String,
-        default: null,
-      },
-      area: {
-        type: String,
-        default: null,
-      },
-      landmark: {
-        type: String,
-        default: null,
-      },
+  address: {
+    state: {
+      type: String,
+      default: null,
     },
-  ],
+    city: {
+      type: String,
+      default: null,
+    },
+    PINcode: {
+      type: String,
+      default: null,
+    },
+    area: {
+      type: String,
+      default: null,
+    },
+    landmark: {
+      type: String,
+      default: null,
+    },
+  },
   profile: {
     type: String,
     default: null,
@@ -66,6 +64,14 @@ const userSchema = new Schema({
   status: {
     type: String,
     default: "N",
+  },
+  createdBy: {
+    type: String,
+    default: null,
+  },
+  updatedBy: {
+    type: String,
+    default: null,
   },
 });
 
