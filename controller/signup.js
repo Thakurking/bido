@@ -44,8 +44,7 @@ exports.signup = async (req, res) => {
     )
   ) {
     return res.json({
-      Error:
-        "Password should contain a special character and digit and uppercase",
+      Error: "Password must contain a uppercse, digit, lowercase",
       isSuccess: false,
     });
   }

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const moment = require("moment");
 
 const postSchema = new Schema({
   /**
@@ -25,12 +26,12 @@ const postSchema = new Schema({
     //accepts total number of people from user for which he wants service
     totalPeople: {
       type: String,
-      required: true,
+      default: null,
     },
     // accepts list of items or dishes from user
     items: {
       type: String,
-      required: true,
+      default: null,
     },
     // accepts extra notes from user for bidders
     notes: {
@@ -40,7 +41,7 @@ const postSchema = new Schema({
     // accepts if user wants waiters or not
     waiters: {
       type: String,
-      default: null, // Y for Yes || N for No
+      default: "N", // Y for Yes || N for No
     },
     // accepts if user wants buffet or serving type
     catType: {
@@ -50,12 +51,12 @@ const postSchema = new Schema({
     // accepts date of delivery service
     servDate: {
       type: String,
-      required: true,
+      default: null,
     },
     // accepts time in chosen date for serving
     servTime: {
       type: String,
-      required: true,
+      default: null,
     },
     // accepts duration for bidding set from user
     bidDuration: {
@@ -66,6 +67,7 @@ const postSchema = new Schema({
   //==================================================================================//
   /**
    * This is Shipping related services field object
+   * This stores all the information related shipping
    */
   shipping: {
     // This accepts weight for shipping products
@@ -75,13 +77,49 @@ const postSchema = new Schema({
     },
     // This accepts from where to take ship
     from: {
-      type: String,
-      required: true,
+      state: {
+        type: String,
+        default: null,
+      },
+      district: {
+        type: String,
+        default: null,
+      },
+      city: {
+        type: String,
+        default: null,
+      },
+      area: {
+        type: String,
+        default: null,
+      },
+      landmark: {
+        type: String,
+        default: null,
+      },
     },
     // This accepts where to ship the products
     to: {
-      type: String,
-      required: true,
+      state: {
+        type: String,
+        default: null,
+      },
+      district: {
+        type: String,
+        default: null,
+      },
+      city: {
+        type: String,
+        default: null,
+      },
+      area: {
+        type: String,
+        default: null,
+      },
+      landmark: {
+        type: String,
+        default: null,
+      },
     },
     // Accepts extra notes form user for shipper
     notes: {
@@ -105,6 +143,11 @@ const postSchema = new Schema({
         default: null,
       },
     ],
+    //This Accepts What Product Customer Wanted To Get Shiped
+    product: {
+      type: String,
+      default: null,
+    },
     bidDuration: {
       type: String,
       default: null,
@@ -119,13 +162,13 @@ const postSchema = new Schema({
     photo: [
       {
         type: String,
-        required: true,
+        default: null,
       },
     ],
     // This accepts area of project from user
     area: {
       type: String,
-      required: true,
+      default: null,
     },
     // This accepts extra notes from user for bidder
     notes: {
@@ -146,7 +189,7 @@ const postSchema = new Schema({
     map: [
       {
         type: String,
-        required: true,
+        default: null,
       },
     ],
     // This accepts number of rooms to be prepared in the property
@@ -172,16 +215,17 @@ const postSchema = new Schema({
     //This accepts land area of property
     landArea: {
       type: String,
-      required: true,
+      default: null,
     },
     bidDuration: {
       type: String,
       default: null,
     },
   },
+  //==================================================================================//
   postedOn: {
     type: String,
-    default: Date.now(),
+    default: moment().format("dddd, Do, MMMM, YYYY, h:mm:ss a"),
   },
 });
 

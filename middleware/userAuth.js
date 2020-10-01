@@ -5,7 +5,7 @@ const User = require("../model/user");
 
 module.exports = async (req, res, next) => {
   try {
-    const token = req.headers;
+    const { token } = req.headers;
     if (!token) {
       return res.json({ Error: "You Must Be Logged In", isSuccess: false });
     }
