@@ -12,13 +12,14 @@ const OTP = require("../model/otp");
 //Nodemailer
 let transporter = nodemailer.createTransport({
   service: process.env.service,
+  port: 80,
   auth: {
     user: process.env.user,
     pass: process.env.pass,
   },
 });
 
-//#region User Signup Page
+//#region User Signup router
 exports.signup = async (req, res) => {
   const { name, phone, email, password, cpassword } = req.body;
   if (!name || !email || !phone || !password || !cpassword) {
@@ -27,7 +28,7 @@ exports.signup = async (req, res) => {
       isSuccess: false,
     });
   }
-  if ((!validator.isMobilePhone(phone), ["en-IN"])) {
+  if (!validator.isMobilePhone(phone)) {
     return res.json({
       Error: "Please Enter Valid Phone Number",
       isSuccess: false,
@@ -77,10 +78,16 @@ exports.signup = async (req, res) => {
             <br><a>Your OTP is: ${otpNum}</a>`,
   };
   transporter.sendMail(mailoption, async (err, info) => {
+    console.log(err);
+    console.log(info);
     if (!err && info !== null) {
-      bcrypt.genSalt(process.env.round, async (err, salt) => {
+      bcrypt.genSalt(10, async (err, salt) => {
+        console.log(err);
+        console.log(salt);
         if (!err) {
           bcrypt.hash(password, salt, async (err, hash) => {
+            console.log(hash);
+            console.log(err);
             if (!err) {
               const user = new User({
                 email: email,
@@ -93,12 +100,14 @@ exports.signup = async (req, res) => {
                 referalCode: uuidv4(),
               });
               const saveUser = await user.save();
+              console.log(saveUser);
               const otp = new OTP({
                 userId: saveUser._id,
                 otp: otpNum,
                 usedFor: "account activation",
               });
               const saveOTP = await otp.save();
+              console.log(saveOTP);
               if (saveOTP && saveUser) {
                 return res.json({
                   message: "OTP sent to your email plese verify",
@@ -115,16 +124,17 @@ exports.signup = async (req, res) => {
           });
         }
       });
+    } else {
+      return res.json({
+        message: "Cound Not Send OTP PLease Try Again",
+        isSuccess: false,
+      });
     }
-    return res.json({
-      message: "Cound Not Send OTP PLease Try Again",
-      isSuccess: false,
-    });
   });
 };
 //#endregion
 
-//#region OTP Verification
+//#region OTP Verification router
 exports.verifyOTP = async (req, res) => {
   const { otp, userId } = req.body;
   if (!otp || !userId) {
