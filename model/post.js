@@ -179,20 +179,18 @@ const postSchema = new Schema({
     //This accepts floor of the property
     isFloor: {
       type: String,
-      default: "Y",
+      default: "Y", //Y for included N for not included
     },
     //This accepts ceiling of the property
     isCeiling: {
       type: String,
-      default: "Y",
+      default: "Y", //Y for included N for not included
     },
     //This accepts number of rooms of the property
-    rooms: [
-      {
-        type: String,
-        default: null,
-      },
-    ],
+    rooms: {
+      type: String,
+      default: null,
+    },
     //This accepts the location for the clients property
     location: {
       state: {

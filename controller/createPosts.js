@@ -5,6 +5,7 @@ const Post = require("../model/post");
 
 const catering = require("../component/post/catering");
 const shipping = require("../component/post/shipping");
+const interiorDesign = require("../component/post/interiorDesign");
 
 exports.createPost = async (req, res) => {
   console.log("hello");
@@ -18,5 +19,8 @@ exports.createPost = async (req, res) => {
   }
   if (cat == 2) {
     shipping(req, res);
+  }
+  if (cat == 3) {
+    interiorDesign(req, res);
   }
 };
