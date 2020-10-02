@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
 
 //Database table
 const Post = require("../../model/post");
@@ -13,6 +14,7 @@ module.exports = async (req, res) => {
     postedBy,
     waiters,
     catType,
+    _id,
   } = req.body;
   if (
     !totalPeople ||
@@ -22,22 +24,29 @@ module.exports = async (req, res) => {
     !catType ||
     !servDate ||
     !servTime ||
-    !postedBy
+    !postedBy ||
+    !_id
   ) {
     return res.json({
       Error: "Please Provide All The Details",
       isSuccess: false,
     });
   }
+  if (!isNaN(totalPeople)) {
+    return res.json({
+      Error: "Number Of People Will Be In Number",
+      isSuccess: false,
+    });
+  }
   const catering = {
-    totalPeople: req.body.totalPeople,
-    items: req.body.items,
-    notes: req.body.notes,
-    waiters: req.body.waiters,
-    catType: req.body.catType,
-    servDate: req.body.servDate,
-    servTime: req.body.servTime,
-    postedBy: req.body._id,
+    totalPeople: totalPeople,
+    items: items,
+    notes: notes,
+    waiters: waiters,
+    catType: catType,
+    servDate: servDate,
+    servTime: servTime,
+    postedBy: _id,
   };
   const savePost = await Post.create({ catering });
   console.log(savePost);

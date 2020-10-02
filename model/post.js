@@ -165,10 +165,48 @@ const postSchema = new Schema({
         default: null,
       },
     ],
-    // This accepts area of project from user
-    area: {
+    // This accepts are of client's property
+    // size: {
+    //   width: {
+    //     type: String,
+    //     default: null,
+    //   },
+    //   height: {
+    //     type: String,
+    //     default: null,
+    //   },
+    // },
+    //This accepts floor of the property
+    isFloor: {
       type: String,
-      default: null,
+      default: "Y",
+    },
+    //This accepts ceiling of the property
+    isCeiling: {
+      type: String,
+      default: "Y",
+    },
+    //This accepts number of rooms of the property
+    rooms: [
+      {
+        type: String,
+        default: null,
+      },
+    ],
+    //This accepts the location for the clients property
+    location: {
+      state: {
+        type: String,
+        default: null,
+      },
+      district: {
+        type: String,
+        default: null,
+      },
+      city: {
+        type: String,
+        default: null,
+      },
     },
     // This accepts extra notes from user for bidder
     notes: {
