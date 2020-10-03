@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 //Database table
 const Post = require("../../model/post");
 
+//#region interior Design module for createPost controller
 module.exports = async (req, res) => {
   console.log(req.body);
   const { isFloor, isCeiling, notes, rooms } = req.body;
@@ -32,7 +33,7 @@ module.exports = async (req, res) => {
     rooms: rooms,
     location: location,
   };
-  const savePost = await Post.create({ interiorDesign });
+  const savePost = await Post.create({ interiorDesign, postedBy: _id });
   console.log(savePost);
   if (savePost) {
     return res.json({
@@ -42,3 +43,4 @@ module.exports = async (req, res) => {
     });
   }
 };
+//#endregion

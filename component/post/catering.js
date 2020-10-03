@@ -4,6 +4,7 @@ const moment = require("moment");
 //Database table
 const Post = require("../../model/post");
 
+//#region catering module for createPost controller
 module.exports = async (req, res) => {
   const {
     totalPeople,
@@ -46,9 +47,8 @@ module.exports = async (req, res) => {
     catType: catType,
     servDate: servDate,
     servTime: servTime,
-    postedBy: _id,
   };
-  const savePost = await Post.create({ catering });
+  const savePost = await Post.create({ catering, postedBy: _id });
   console.log(savePost);
   if (savePost) {
     return res.json({
@@ -58,3 +58,4 @@ module.exports = async (req, res) => {
     });
   }
 };
+//#endregion

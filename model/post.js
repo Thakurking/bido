@@ -253,6 +253,21 @@ const postSchema = new Schema({
       type: String,
       default: null,
     },
+    //This accepts the location for the clients property
+    location: {
+      state: {
+        type: String,
+        default: null,
+      },
+      district: {
+        type: String,
+        default: null,
+      },
+      city: {
+        type: String,
+        default: null,
+      },
+    },
     bidDuration: {
       type: String,
       default: null,
@@ -262,6 +277,10 @@ const postSchema = new Schema({
   postedOn: {
     type: String,
     default: moment().format("dddd, Do, MMMM, YYYY, h:mm:ss a"),
+  },
+  status: {
+    type: String,
+    default: "N",
   },
 });
 
