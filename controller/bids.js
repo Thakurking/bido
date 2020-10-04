@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Bids = require("../model/bids");
 const User = require("../model/user");
 const Post = require("../model/post");
-const post = require("../model/post");
+const BidNotify = require("../model/bidNotification");
 
 //#region Take Bids From Bidders
 exports.bidsIn = async (req, res) => {
@@ -29,6 +29,13 @@ exports.bidsIn = async (req, res) => {
   if (isSelf) {
     return res.json({ Error: "Cannot Bid On Own Post", isSuccess: false });
   }
+  const isPostStatus = await Post.findOne({ _id: post });
+  if (isPostStatus.status == "Y") {
+    return res.json({
+      Error: "Post Has Already Accepted Bids",
+      isSuccess: false,
+    });
+  }
   const isSameBid = await Bids.findOne({ post: post, amount: amount });
   if (isSameBid) {
     return res.json({
@@ -48,7 +55,7 @@ exports.bidsIn = async (req, res) => {
   console.log(savePost);
   if (savePost) {
     return res.json({
-      message: "Thank You For Bidding",
+      message: "Your Bid Submitted",
       isSuccess: true,
       savePost,
     });
@@ -56,7 +63,7 @@ exports.bidsIn = async (req, res) => {
 };
 //#endregion
 
-//#region Accept bid from client
+//#region Accept bid for client
 exports.acceptBids = async (req, res) => {
   const { bidId, postId } = req.body;
   if (!bidId) {
@@ -69,6 +76,13 @@ exports.acceptBids = async (req, res) => {
   if (isBid.status == "Y") {
     return res.json({ Error: "Bid Already Accepted", isSuccess: false });
   }
+  const isPostStatus = await Post.findOne({ _id: postId });
+  if (isPostStatus.status == "Y") {
+    return res.json({
+      Error: "Post Has Already Accepted Bids",
+      isSuccess: false,
+    });
+  }
   const bidUpdate = await Bids.updateOne(
     { _id: bidId },
     { $set: { status: "Y" } }
@@ -76,14 +90,33 @@ exports.acceptBids = async (req, res) => {
   console.log(bidUpdate);
   const postUpdate = await Post.updateOne(
     { _id: postId },
-    { $set: { status: "Y" } }
+    { $set: { status: "Y", bidder: bidUpdate.bidder } }
   );
   console.log(postUpdate);
-  if (bidUpdate && postUpdate) {
+  const bidderUpdate = await Post.updateOne(
+    { _id: postId },
+    { $set: { bidder: isBid.bidder } }
+  );
+  const client = await User.findOne({ _id: isPostStatus.postedBy });
+  if (!client) {
+    return res.json({ Error: "No User Found", isSuccess: false });
+  }
+  console.log(bidderUpdate);
+  const bidNotify = await BidNotify.create({
+    categoryName: isPostStatus.category,
+    clientName: client.name,
+    clientEmail: client.email,
+    clientPhone: client.phone,
+    amount: bidUpdate.amount,
+    bidder: bidUpdate.bidder,
+  });
+  console.log(bidNotify);
+  if (bidUpdate && postUpdate && bidderUpdate && bidNotify) {
     return res.json({
       message: "Bid Accepted Bidder Will Contact You Soon",
       isSuccess: true,
       bidUpdate,
+      postUpdate,
     });
   }
 };

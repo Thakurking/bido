@@ -278,9 +278,18 @@ const postSchema = new Schema({
     type: String,
     default: moment().format("dddd, Do, MMMM, YYYY, h:mm:ss a"),
   },
+  /**
+   * N for showing post untill bidder not accepted from the user
+   * Y for accepting the bidder bid and not showing as post anywhere to any bidder
+   * then only show in accepted bid history
+   */
   status: {
     type: String,
     default: "N",
+  },
+  bidder: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 

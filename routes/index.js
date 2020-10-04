@@ -3,8 +3,10 @@ const router = express.Router();
 
 const signupController = require("../controller/signup");
 const loginController = require("../controller/login");
-const postRouter = require("../controller/createPosts");
+const postController = require("../controller/createPosts");
 const bidsController = require("../controller/bids");
+const postHistoryController = require("../controller/post");
+const bidHistoryController = require("../controller/bidLog");
 
 const isUser = require("../middleware/userAuth");
 const photo = require("../middleware/multer");
@@ -14,8 +16,17 @@ router.post("/verifyOTP", signupController.verifyOTP);
 
 router.post("/login", loginController.login);
 
-router.post("/createPost", photo.upload.array("photo"), postRouter.createPost);
-
+router.post(
+  "/createPost",
+  photo.upload.array("photo"),
+  postController.createPost
+);
 router.post("/bidsIn", bidsController.bidsIn);
 router.post("/acceptBids", bidsController.acceptBids);
+
+router.get("/acceptedPost", postHistoryController.acceptedPost);
+router.get("/ongoingPost", postHistoryController.ongoingPost);
+
+router.get("/acceptedBids", bidHistoryController.acceptedBids);
+router.get("/ongoingBids", bidHistoryController.ongoingBids);
 module.exports = router;
