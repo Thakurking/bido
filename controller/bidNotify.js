@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 
 //Database table
 const User = require("../model/user");
-const Post = require("../model/post");
 const BidNotify = require("../model/bidNotification");
 
+//#region Controller for giving notification when clients accepts there bids
 exports.bidNotify = async (req, res) => {
   /**
    * bidder will be removed by req.user from the middleware
-   * for getting the current user to find his notification and show him/her
+   * for getting the current user to find notification and show him/her
    */
   const { bidder } = req.body;
   if (!bidder) {
@@ -27,7 +27,7 @@ exports.bidNotify = async (req, res) => {
     });
   } else {
     return res.json({
-      Error: "You Do Not Have Bid Notification Yet",
+      Error: "You Do Not Have Any Notification Yet",
       isSucccess: false,
     });
   }

@@ -75,6 +75,8 @@ exports.bidsIn = async (req, res) => {
 };
 //#endregion
 
+
+
 //#region Accept bid for client
 exports.acceptBids = async (req, res) => {
   const { bidId, postId } = req.body;
@@ -103,10 +105,10 @@ exports.acceptBids = async (req, res) => {
     { _id: postId },
     { $set: { status: "Y", bidder: bidUpdate.bidder } }
   );
-  const bidderUpdate = await Post.updateOne(
-    { _id: postId },
-    { $set: { bidder: isBid.bidder } }
-  );
+  // const bidderUpdate = await Post.updateOne(
+  //   { _id: postId },
+  //   { $set: { bidder: isBid.bidder } }
+  // );
   const client = await User.findOne({ _id: isPostStatus.postedBy });
   if (!client) {
     return res.json({ Error: "No User Found", isSuccess: false });
@@ -131,7 +133,7 @@ exports.acceptBids = async (req, res) => {
             <br><p>Your Client Email is: ${client.email}</p><br><hr>
             <br><p>Your Client Phone is: ${client.phone}</p><br><hr>`,
   };
-  if (bidUpdate && postUpdate && bidderUpdate && bidNotify) {
+  if (bidUpdate && postUpdate && bidNotify) {
     transporter.sendMail(mailOption, async (err, info) => {
       if (!err && info !== null) {
         return res.json({
@@ -142,6 +144,8 @@ exports.acceptBids = async (req, res) => {
         });
       }
     });
+  } else {
+    return res.json({ Error: "Somethign Went Wrong", isSuccess: false });
   }
 };
 //#endregion

@@ -5,7 +5,6 @@ const Post = require("../../model/post");
 
 //#region construction module for createPost controller
 module.exports = async (req, res) => {
-  console.log("hello");
   const {
     noOfRooms,
     noOfHall,
@@ -42,7 +41,7 @@ module.exports = async (req, res) => {
       isSuccess: false,
     });
   }
-  if (!location) {
+  if (!location.state || !location.district || !location.city) {
     return res.json({ Error: "Please add location", isSuccess: false });
   }
   const construction = {
