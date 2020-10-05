@@ -15,7 +15,6 @@ module.exports = async (req, res) => {
     postedBy,
     waiters,
     catType,
-    _id,
   } = req.body;
   if (
     !totalPeople ||
@@ -25,15 +24,14 @@ module.exports = async (req, res) => {
     !catType ||
     !servDate ||
     !servTime ||
-    !postedBy ||
-    !_id
+    !postedBy
   ) {
     return res.json({
       Error: "Please Provide All The Details",
       isSuccess: false,
     });
   }
-  if (!isNaN(totalPeople)) {
+  if (typeof totalPeople !== "number") {
     return res.json({
       Error: "Number Of People Will Be In Number",
       isSuccess: false,
@@ -48,7 +46,11 @@ module.exports = async (req, res) => {
     servDate: servDate,
     servTime: servTime,
   };
-  const savePost = await Post.create({ catering, postedBy: _id });
+  const savePost = await Post.create({
+    catering,
+    postedBy: postedBy,
+    category: req.body.cat,
+  });
   console.log(savePost);
   if (savePost) {
     return res.json({

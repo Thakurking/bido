@@ -7,6 +7,7 @@ const postController = require("../controller/createPosts");
 const bidsController = require("../controller/bids");
 const postHistoryController = require("../controller/post");
 const bidHistoryController = require("../controller/bidLog");
+const bidNotify = require("../controller/bidNotify");
 
 const isUser = require("../middleware/userAuth");
 const photo = require("../middleware/multer");
@@ -29,4 +30,6 @@ router.get("/ongoingPost", postHistoryController.ongoingPost);
 
 router.get("/acceptedBids", bidHistoryController.acceptedBids);
 router.get("/ongoingBids", bidHistoryController.ongoingBids);
+
+router.get("/bidNotify", bidNotify.bidNotify);
 module.exports = router;

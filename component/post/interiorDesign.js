@@ -33,7 +33,11 @@ module.exports = async (req, res) => {
     rooms: rooms,
     location: location,
   };
-  const savePost = await Post.create({ interiorDesign, postedBy: _id });
+  const savePost = await Post.create({
+    interiorDesign,
+    postedBy: _id,
+    category: req.body.cat,
+  });
   console.log(savePost);
   if (savePost) {
     return res.json({

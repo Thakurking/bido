@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
-const e = require("express");
 const Schema = mongoose.Schema;
 
 const notifySchema = new Schema({

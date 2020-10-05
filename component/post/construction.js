@@ -12,7 +12,6 @@ module.exports = async (req, res) => {
     noOfKitchen,
     noOfBathroom,
     landArea,
-    cat,
     _id,
   } = req.body;
   const { location } = req.body;
@@ -53,9 +52,12 @@ module.exports = async (req, res) => {
     noOfRooms: noOfRooms,
     landArea: landArea,
     location: location,
-    category: cat,
   };
-  const savePost = await Post.create({ construction, postedBy: _id });
+  const savePost = await Post.create({
+    construction,
+    postedBy: _id,
+    category: req.body.cat,
+  });
   console.log(savePost);
   if (savePost) {
     return res.json({

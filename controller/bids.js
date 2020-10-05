@@ -1,10 +1,21 @@
 const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
 
 //Databse table
 const Bids = require("../model/bids");
 const User = require("../model/user");
 const Post = require("../model/post");
 const BidNotify = require("../model/bidNotification");
+
+//Nodemailer
+let transporter = nodemailer.createTransport({
+  service: process.env.service,
+  port: 80,
+  auth: {
+    user: process.env.user,
+    pass: process.env.pass,
+  },
+});
 
 //#region Take Bids From Bidders
 exports.bidsIn = async (req, res) => {
@@ -21,11 +32,12 @@ exports.bidsIn = async (req, res) => {
   const isUser = await User.findOne({ _id: bidder });
   if (!isUser) {
     return res.json({
-      Error: "User Not Authrozied Please login First",
+      Error: "User Not Authrozied Please Signup First",
       isSuccess: false,
     });
   }
-  const isSelf = await Post.findOne({ postedBy: bidder });
+  const isSelf = await Post.findOne({ _id: post, postedBy: bidder });
+  console.log(isSelf);
   if (isSelf) {
     return res.json({ Error: "Cannot Bid On Own Post", isSuccess: false });
   }
@@ -87,12 +99,10 @@ exports.acceptBids = async (req, res) => {
     { _id: bidId },
     { $set: { status: "Y" } }
   );
-  console.log(bidUpdate);
   const postUpdate = await Post.updateOne(
     { _id: postId },
     { $set: { status: "Y", bidder: bidUpdate.bidder } }
   );
-  console.log(postUpdate);
   const bidderUpdate = await Post.updateOne(
     { _id: postId },
     { $set: { bidder: isBid.bidder } }
@@ -101,22 +111,36 @@ exports.acceptBids = async (req, res) => {
   if (!client) {
     return res.json({ Error: "No User Found", isSuccess: false });
   }
-  console.log(bidderUpdate);
+  console.log(isBid.amount);
   const bidNotify = await BidNotify.create({
     categoryName: isPostStatus.category,
     clientName: client.name,
     clientEmail: client.email,
     clientPhone: client.phone,
-    amount: bidUpdate.amount,
-    bidder: bidUpdate.bidder,
+    amount: isBid.amount,
+    bidder: isBid.bidder,
   });
   console.log(bidNotify);
+  const bidder = await User.findOne({ _id: isBid.bidder });
+  console.log(bidder);
+  const mailOption = {
+    from: process.env.user,
+    to: bidder.email,
+    subject: `You Got A Bid Accepted......`,
+    html: `<p>Your Client Name is: ${client.name}</p><br><hr>
+            <br><p>Your Client Email is: ${client.email}</p><br><hr>
+            <br><p>Your Client Phone is: ${client.phone}</p><br><hr>`,
+  };
   if (bidUpdate && postUpdate && bidderUpdate && bidNotify) {
-    return res.json({
-      message: "Bid Accepted Bidder Will Contact You Soon",
-      isSuccess: true,
-      bidUpdate,
-      postUpdate,
+    transporter.sendMail(mailOption, async (err, info) => {
+      if (!err && info !== null) {
+        return res.json({
+          message: "Bid Accepted Bidder Will Contact You Soon",
+          isSuccess: true,
+          bidUpdate,
+          postUpdate,
+        });
+      }
     });
   }
 };

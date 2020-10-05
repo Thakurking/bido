@@ -62,7 +62,11 @@ module.exports = async (req, res) => {
     product: product,
     // photo: photo,
   };
-  const savePost = await Post.create({ shipping, postedBy: _id });
+  const savePost = await Post.create({
+    shipping,
+    postedBy: _id,
+    category: req.body.cat,
+  });
   console.log(savePost);
   if (savePost) {
     return res.json({
