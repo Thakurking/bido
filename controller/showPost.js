@@ -12,14 +12,22 @@ const Post = require("../model/post");
 exports.allPost = async (req, res) => {
   Post.count().exec(async (err, count) => {
     const random = Math.floor(Math.random() * count);
-    Post.findOne({ status: "N" })
-      .skip(random)
+    const status = {
+      status: "N",
+    };
+    Post.find({})
+      .skip(random, status)
       .exec(async (err, result) => {
-        return res.json({
-          message: "fething all posts",
-          isSuccess: true,
-          posts: result,
-        });
+        console.log(result);
+        if (err) {
+          return res.json({ Error: "Something Went Wrong", isSuccess: false });
+        } else {
+          return res.json({
+            message: "Showing All Post",
+            isSuccess: true,
+            post: result,
+          });
+        }
       });
   });
 };

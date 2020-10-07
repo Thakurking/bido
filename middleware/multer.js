@@ -1,15 +1,14 @@
 const multer = require("multer");
-const uuid = require("uuid");
+const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 
-const DIR = "public/posts";
-
+const DIR = "public/images/";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (!fs.existsSync(DIR)) {
       fs.mkdir(DIR);
     }
-    cb(null);
+    cb(null, DIR);
   },
   filename: (req, file, cb) => {
     const filename = file.originalname.toLocaleLowerCase().split(" ").join("-");

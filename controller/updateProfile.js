@@ -39,13 +39,14 @@ exports.updateAddress = async (req, res) => {
 
 /**
  * This updates user profile image
- * @module updateProfile
+ * @module profileUpdate
  * @param {string} userId - takes user id from user
  * @param {string} profile - takes profile image of user
  */
 //#region Controller for updating update profile image
-exports.updateProfile = async (req, res) => {
+exports.profileUpdate = async (req, res) => {
   //userId will be removed by req.user after setting up middleware
+  console.log("hello");
   const { userId } = req.body;
   if (!userId) {
     return res.json({ Error: "User Not Authorized", isSuccess: false });
@@ -54,11 +55,11 @@ exports.updateProfile = async (req, res) => {
   if (!profile) {
     return res.json({ Error: "Please Select Your Profile", isSuccess: false });
   }
-  const profileUpdate = await User.indOneAndUpdate(
+  const update = await User.findOneAndUpdate(
     { _id: userId },
     { $set: { profile: profile } }
   );
-  if (profileUpdate) {
+  if (update) {
     return res.json({
       message: "Your Profile Image Uploaded",
       isSuccess: true,

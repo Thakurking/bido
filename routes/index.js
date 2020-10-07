@@ -39,8 +39,8 @@ router.get("/allPost", showPost.allPost);
 
 router.post("/updateAddress", profileUpdateController.updateAddress);
 router.post(
-  "/updateProfile",
+  "/profileUpdate",
   photo.upload.single("profile"),
-  profileUpdateController.updateProfile
+  profileUpdateController.profileUpdate
 );
 module.exports = router;
