@@ -46,7 +46,7 @@ exports.ongoingBids = async (req, res) => {
   const allBids = await Bids.find({ bidder: userId, status: "N" });
   if (allBids) {
     return res.json({
-      message: "Showing All Bids",
+      message: "Showing All Ongoing Bids",
       isSuccess: true,
       allBids,
       isUser,

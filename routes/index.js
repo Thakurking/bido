@@ -9,6 +9,7 @@ const postHistoryController = require("../controller/post");
 const bidHistoryController = require("../controller/bidLog");
 const bidNotify = require("../controller/bidNotify");
 const showPost = require("../controller/showPost");
+const profileUpdateController = require("../controller/updateProfile");
 
 const isUser = require("../middleware/userAuth");
 const photo = require("../middleware/multer");
@@ -35,4 +36,11 @@ router.get("/ongoingBids", bidHistoryController.ongoingBids);
 router.get("/bidNotify", bidNotify.bidNotify);
 
 router.get("/allPost", showPost.allPost);
+
+router.post("/updateAddress", profileUpdateController.updateAddress);
+router.post(
+  "/updateProfile",
+  photo.upload.single("profile"),
+  profileUpdateController.updateProfile
+);
 module.exports = router;

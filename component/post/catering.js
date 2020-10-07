@@ -3,6 +3,7 @@ const moment = require("moment");
 
 //Database table
 const Post = require("../../model/post");
+const User = require("../../model/user");
 
 //#region catering module for createPost controller
 module.exports = async (req, res) => {
@@ -34,6 +35,13 @@ module.exports = async (req, res) => {
   if (typeof totalPeople !== "number") {
     return res.json({
       Error: "Number Of People Will Be In Number",
+      isSuccess: false,
+    });
+  }
+  const isStatus = await User.findOne({ _id: postedBy });
+  if (!isStatus.address) {
+    return res.json({
+      Error: "Please AddAddress And Update Your Profile First",
       isSuccess: false,
     });
   }
