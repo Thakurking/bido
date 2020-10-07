@@ -19,6 +19,15 @@ let transporter = nodemailer.createTransport({
   },
 });
 
+/**
+ *
+ * @param {string} name - this takes name from user
+ * @param {string} phone - this takes user phone number
+ * @param {string} email - this takes user email
+ * @param {string} password - this takes user password
+ * @param {string} cpassword - this takes user cofirmed password
+ */
+
 //#region User Signup router
 exports.signup = async (req, res) => {
   const { name, phone, email, password, cpassword } = req.body;
@@ -132,6 +141,12 @@ exports.signup = async (req, res) => {
   });
 };
 //#endregion
+
+/**
+ *
+ * @param {string} otp - this takes otp from the user
+ * @param {string} userId - this takes user id
+ */
 
 //#region OTP Verification router
 exports.verifyOTP = async (req, res) => {

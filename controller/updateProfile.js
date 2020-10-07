@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { findByIdAndUpdate, findOneAndUpdate } = require("../model/user");
 
 //Database table
 const User = require("../model/user");
@@ -13,6 +12,7 @@ const User = require("../model/user");
 
 //#region Controller for updating address
 exports.updateAddress = async (req, res) => {
+  //userId will be removed by req.user after setting up middleware
   const { userId } = req.body;
   if (!userId) {
     return res.json({ Error: "User Not Authorized", isSuccess: false });
@@ -45,6 +45,7 @@ exports.updateAddress = async (req, res) => {
  */
 //#region Controller for updating update profile image
 exports.updateProfile = async (req, res) => {
+  //userId will be removed by req.user after setting up middleware
   const { userId } = req.body;
   if (!userId) {
     return res.json({ Error: "User Not Authorized", isSuccess: false });
@@ -53,7 +54,7 @@ exports.updateProfile = async (req, res) => {
   if (!profile) {
     return res.json({ Error: "Please Select Your Profile", isSuccess: false });
   }
-  const profileUpdate = await findOneAndUpdate(
+  const profileUpdate = await User.indOneAndUpdate(
     { _id: userId },
     { $set: { profile: profile } }
   );
