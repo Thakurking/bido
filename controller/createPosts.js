@@ -9,6 +9,11 @@ const shipping = require("../component/post/shipping");
 const interiorDesign = require("../component/post/interiorDesign");
 const construction = require("../component/post/construction");
 
+/**
+ * @module createPost
+ * @param {string} cat - this take different category from user for post
+ */
+
 //#region create bid post from user
 exports.createPost = async (req, res) => {
   console.log("hello");

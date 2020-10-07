@@ -6,6 +6,12 @@ const jwt = require("jsonwebtoken");
 //Database tables
 const User = require("../model/user");
 
+/**
+ *@module login
+ * @param {string} phone - this takes user phone number
+ * @param {string} password - this takes password from user
+ */
+
 //#region Login router
 exports.login = async (req, res) => {
   const { phone, password } = req.body;
@@ -55,3 +61,4 @@ exports.login = async (req, res) => {
     return res.json({ Error: "User Not Found", isSuccess: false });
   }
 };
+//#endregion

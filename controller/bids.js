@@ -17,6 +17,13 @@ let transporter = nodemailer.createTransport({
   },
 });
 
+/**
+ * @module bidsIn
+ * @param {string} post - this takes post _id from post schema
+ * @param {string} bidder - this takes bidder _id
+ * @param {string} amount - this takes amount money for bidding
+ */
+
 //#region Take Bids From Bidders
 exports.bidsIn = async (req, res) => {
   const { post, bidder, amount } = req.body;
@@ -75,7 +82,11 @@ exports.bidsIn = async (req, res) => {
 };
 //#endregion
 
-
+/**
+ * @module acceptBids
+ * @param {string} bidsIn - this takes bid _id
+ * @param {string} postId - this takes post _id
+ */
 
 //#region Accept bid for client
 exports.acceptBids = async (req, res) => {

@@ -20,7 +20,7 @@ let transporter = nodemailer.createTransport({
 });
 
 /**
- *
+ *@module signup
  * @param {string} name - this takes name from user
  * @param {string} phone - this takes user phone number
  * @param {string} email - this takes user email
@@ -143,7 +143,7 @@ exports.signup = async (req, res) => {
 //#endregion
 
 /**
- *
+ *@module verifyOTP
  * @param {string} otp - this takes otp from the user
  * @param {string} userId - this takes user id
  */

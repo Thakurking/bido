@@ -5,8 +5,14 @@ const User = require("../model/user");
 const Bids = require("../model/bids");
 const Post = require("../model/post");
 
+/**
+ * @module acceptedBids
+ * @param {string} userId - takes user id from user
+ */
+
 //#region Controller for bids accepted from clients
 exports.acceptedBids = async (req, res) => {
+  //userId will be removed by req.user after setting up middleware
   const { userId } = req.body;
   if (!userId) {
     return res.json({ Error: "Not Authorized", isSuccess: false });
@@ -33,8 +39,14 @@ exports.acceptedBids = async (req, res) => {
 };
 //#endregion
 
+/**
+ *
+ * @param {string} userId - takes user id from user
+ */
+
 //#region Controller for bids that have not accepted by any client
 exports.ongoingBids = async (req, res) => {
+  //userId will be removed by req.user after setting up middleware
   const { userId } = req.body;
   if (!userId) {
     return res.json({ Error: "Not Authorized", isSuccess: false });

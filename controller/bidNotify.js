@@ -4,6 +4,11 @@ const mongoose = require("mongoose");
 const User = require("../model/user");
 const BidNotify = require("../model/bidNotification");
 
+/**
+ *@module bidNotify
+ * @param {string} bidder - takes bidder _id from user schema
+ */
+
 //#region Controller for giving notification when clients accepts there bids
 exports.bidNotify = async (req, res) => {
   /**
