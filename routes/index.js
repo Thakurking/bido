@@ -43,4 +43,5 @@ router.post(
   photo.upload.single("profile"),
   profileUpdateController.profileUpdate
 );
+router.post("/changePassword", profileUpdateController.changePassword);
 module.exports = router;
