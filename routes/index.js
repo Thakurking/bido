@@ -44,4 +44,8 @@ router.post(
   profileUpdateController.profileUpdate
 );
 router.post("/changePassword", profileUpdateController.changePassword);
+router.post(
+  "/changePasswordViaOTP",
+  profileUpdateController.changePasswordViaOTP
+);
 module.exports = router;
