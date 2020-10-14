@@ -1,7 +1,4 @@
-const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-
-const User = require("../model/user");
 
 module.exports = async (req, res, next) => {
   try {
@@ -12,13 +9,15 @@ module.exports = async (req, res, next) => {
     const auth = token.replace("Bearer ", "");
     jwt.verify(auth, process.env.SECRET_KEY, async (err, payload) => {
       if (err) {
-        return res.json({ Error: "You Must Be Logged In", isSuccess: false });
+        return res.json({ Error: "Authentication Failed", isSuccess: false });
       }
-      const { id } = payload;
-      User.findOne({ _id: id }).then(async (userData) => {
-        req.user = userData;
+      if (payload.client && payload.user) {
+        req.client = true;
+        req.user = payload.user;
         next();
-      });
+      } else {
+        return res.json({ message: "Authentication Failed", isSuccess: false });
+      }
     });
   } catch (error) {
     console.log(error);

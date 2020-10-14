@@ -8,7 +8,7 @@ const bidsController = require("../controller/bids");
 const postHistoryController = require("../controller/post");
 const bidHistoryController = require("../controller/bidLog");
 const bidNotify = require("../controller/bidNotify");
-const showPost = require("../controller/showPost");
+const showAllPost = require("../controller/showPost");
 const profileUpdateController = require("../controller/updateProfile");
 
 const isUser = require("../middleware/userAuth");
@@ -35,7 +35,7 @@ router.get("/ongoingBids", bidHistoryController.ongoingBids);
 
 router.get("/bidNotify", bidNotify.bidNotify);
 
-router.get("/allPost", showPost.allPost);
+router.get("/showAllPost", showAllPost.showAllPost);
 
 router.post("/updateAddress", profileUpdateController.updateAddress);
 router.post(

@@ -27,36 +27,36 @@ exports.login = async (req, res) => {
       isSuccess: false,
     });
   }
-  const user = await User.findOne({ phone: phone });
-  if (user) {
-    if (obj !== null) {
-      bcrypt.compare(password, obj.password, async (err, result) => {
-        if (err) {
-          return res.json({
-            Error: "Something went wrong please try again",
-            isSuccess: false,
-          });
-        }
-        if (result !== true) {
-          return res.json({
-            Error: "Wrong Email Or Password Please Try Aain",
-            isSuccess: false,
-          });
-        }
-        const payload = obj._id;
-        const token = jwt.sign({ payload }, process.env.SECRET_KEY, {
-          expiresIn: "1h",
-        });
-        const user = obj;
-        user.password = "";
+  const isUser = await isUser.findOne({ phone: phone });
+  if (isUser) {
+    bcrypt.compare(password, isUser.password, async (err, result) => {
+      if (err) {
         return res.json({
-          message: "Auth Successfull",
-          isSuccess: true,
-          user,
-          token,
+          Error: "Something went wrong please try again",
+          isSuccess: false,
         });
+      }
+      if (result !== true) {
+        return res.json({
+          Error: "Wrong Email Or Password Please Try Aain",
+          isSuccess: false,
+        });
+      }
+      const payload = {};
+      payload.user = isUser._id;
+      if (isUser.role === "client") payload.client = true;
+      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+        expiresIn: "1h",
       });
-    }
+      const User = isUser;
+      User.password = "";
+      return res.json({
+        message: "Login Successful",
+        isSuccess: true,
+        User,
+        token,
+      });
+    });
   } else {
     return res.json({ Error: "User Not Found", isSuccess: false });
   }
