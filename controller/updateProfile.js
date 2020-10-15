@@ -30,14 +30,14 @@ exports.updateAddress = async (req, res) => {
   if (!userId) {
     return res.json({ Error: "User Not Authorized", isSuccess: false });
   }
+  const { address } = req.body
   if (!address) {
-    return res.json({ Error: "Please Provide", isSuccess: false });
+    return res.json({ Error: "Please Provide Address", isSuccess: false });
   }
   const updateProfile = await User.findOneAndUpdate(
     { _id: userId },
     { $set: { address: address } }
   );
-  console.log(updateProfile);
   if (updateProfile) {
     return res.json({
       message: "Your Address Updated",
