@@ -30,7 +30,7 @@ exports.updateAddress = async (req, res) => {
   if (!userId) {
     return res.json({ Error: "User Not Authorized", isSuccess: false });
   }
-  const { address } = req.body
+  const { address } = req.body;
   if (!address) {
     return res.json({ Error: "Please Provide Address", isSuccess: false });
   }
