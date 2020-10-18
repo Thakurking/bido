@@ -57,6 +57,7 @@ module.exports = async (req, res) => {
     catType: catType,
     servDate: servDate,
     servTime: servTime,
+    location: location,
   };
   const savePost = await Post.create({
     catering,
