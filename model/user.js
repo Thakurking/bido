@@ -32,9 +32,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  gender: {
-    type: String,
-  },
   address: {
     state: {
       type: String,
