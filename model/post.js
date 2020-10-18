@@ -63,6 +63,20 @@ const postSchema = new Schema({
       type: String,
       default: null,
     },
+    location: {
+      state: {
+        type: String,
+        default: null,
+      },
+      district: {
+        type: String,
+        default: null,
+      },
+      city: {
+        type: String,
+        default: null,
+      },
+    },
   },
   //==================================================================================//
   /**

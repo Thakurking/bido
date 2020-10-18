@@ -11,11 +11,14 @@ module.exports = async (req, res) => {
   const { to } = req.body;
   console.log(to);
   if (!from) {
-    return res.json({ Error: "Please Enter Location", isSuccess: false });
+    return res.json({
+      Error: "Please Enter Pickup Location",
+      isSuccess: false,
+    });
   }
   if (!to) {
     return res.json({
-      Error: "Please Enter Destination",
+      Error: "Please Enter Destination Location",
       isSuccess: false,
     });
   }

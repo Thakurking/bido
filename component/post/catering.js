@@ -17,6 +17,7 @@ module.exports = async (req, res) => {
     waiters,
     catType,
   } = req.body;
+  const { location } = req.body;
   if (
     !totalPeople ||
     !items ||
@@ -31,6 +32,9 @@ module.exports = async (req, res) => {
       Error: "Please Provide All The Details",
       isSuccess: false,
     });
+  }
+  if (!location) {
+    return res.json({ Error: "Please Enter Your Address", isSuccess: false });
   }
   if (typeof totalPeople !== "number") {
     return res.json({

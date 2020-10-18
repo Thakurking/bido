@@ -40,7 +40,7 @@ exports.acceptedBids = async (req, res) => {
 //#endregion
 
 /**
- *
+ *@module ongoingBids
  * @param {string} userId - takes user id from user
  */
 
