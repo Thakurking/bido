@@ -5,6 +5,7 @@ different services such as Catering, Shipping, Interior Design and Construction.
 ## User :-
 User can bid a post on any of the different categories shown above and then accept 
 bids from different bidders and then they can contact each other.
+User can also bid on different users post.
 ## Bidder :-
 Bidder can give bids to different bids posted by different users
 and if any user accepts there bids they will get information via email and the user details
