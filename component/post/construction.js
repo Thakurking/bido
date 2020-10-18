@@ -5,14 +5,12 @@ const Post = require("../../model/post");
 
 //#region construction module for createPost controller
 module.exports = async (req, res) => {
-  const {
-    noOfRooms,
-    noOfHall,
-    noOfKitchen,
-    noOfBathroom,
-    landArea,
-    _id,
-  } = req.body;
+  //userId will going to be removed by the req.user when the middleware will going to setup
+  const { userId } = req.body;
+  if (!userId) {
+    return res.json({ Error: "Not Authorized", isSuccess: false });
+  }
+  const { noOfRooms, noOfHall, noOfKitchen, noOfBathroom, landArea } = req.body;
   const { location } = req.body;
   if (!noOfRooms || !noOfHall || !noOfKitchen || !noOfBathroom || !landArea) {
     return res.json({ Error: "Please Provide All Details", isSuccess: false });
@@ -54,7 +52,7 @@ module.exports = async (req, res) => {
   };
   const savePost = await Post.create({
     construction,
-    postedBy: _id,
+    postedBy: userId,
     category: req.body.cat,
   });
   console.log(savePost);
