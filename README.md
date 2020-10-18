@@ -10,6 +10,7 @@ User can also bid on different users post.
 Bidder can give bids to different bids posted by different users
 and if any user accepts there bids they will get information via email and the user details
 and the post details of the bids.
+Bidder can also give post for different biders for own services
 # Services..
 This service is related to the bids postes by the user which is Catering, Shipping, Interior Design, Construction.
 ## Catering
