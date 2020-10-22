@@ -10,6 +10,7 @@ const bidHistoryController = require("../controller/bidLog");
 const bidNotify = require("../controller/bidNotify");
 const showAllPost = require("../controller/showPost");
 const profileUpdateController = require("../controller/updateProfile");
+const deletePost = require("../controller/deletePost");
 
 const isUser = require("../middleware/userAuth");
 const photo = require("../middleware/multer");
@@ -48,4 +49,6 @@ router.post(
   "/changePasswordViaOTP",
   profileUpdateController.changePasswordViaOTP
 );
+
+router.delete("/deletePost", deletePost.deletePost);
 module.exports = router;

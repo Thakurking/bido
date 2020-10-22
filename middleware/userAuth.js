@@ -4,7 +4,7 @@ module.exports = async (req, res, next) => {
   try {
     const { token } = req.headers;
     if (!token) {
-      return res.json({ Error: "You Must Be Logged In", isSuccess: false });
+      return res.json({ Error: "Access Denied", isSuccess: false });
     }
     const auth = token.replace("Bearer ", "");
     jwt.verify(auth, process.env.SECRET_KEY, async (err, payload) => {
@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
         req.user = payload.user;
         next();
       } else {
-        return res.json({ message: "Authentication Failed", isSuccess: false });
+        return res.json({ message: "Not Authorized", isSuccess: false });
       }
     });
   } catch (error) {
