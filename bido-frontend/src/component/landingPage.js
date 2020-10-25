@@ -41,8 +41,8 @@ export default function ElevateAppBar(props) {
               }}
             >
               <Link
-                style={{ textDecoration: "none", color: "white" }}
                 to="/login"
+                style={{ textDecoration: "none", color: "white" }}
               >
                 Login
               </Link>
@@ -87,15 +87,15 @@ export default function ElevateAppBar(props) {
         <h2>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             size="large"
             style={{
               fontSize: 20,
             }}
           >
             <Link
-              style={{ textDecoration: "none", color: "white" }}
               to="/signup"
+              style={{ textDecoration: "none", color: "white" }}
             >
               Signup
             </Link>
@@ -120,9 +120,7 @@ export default function ElevateAppBar(props) {
             <GitHubIcon />
           </Button>
         </h2>
-        <h2>
-          Contact Number 6294923461.
-        </h2>
+        <h2>Contact Number 6294923461.</h2>
       </Container>
     </React.Fragment>
   );
