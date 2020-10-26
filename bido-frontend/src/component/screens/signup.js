@@ -23,9 +23,10 @@ const Signup = () =>{
                   style={{
                     fontFamily: "monospace",
                     marginTop: 25,
+                    color: "blueviolet",
                   }}
                 >
-                  Login
+                  SignUp
                 </Typography>
                 <Grid>
                   <form
@@ -86,7 +87,14 @@ const Signup = () =>{
               <Grid container justify="center">
                 <h3>
                   Already registered.
-                  <Link to="/login">Login</Link>
+                  <Link
+                    to="/login"
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    Login
+                  </Link>
                 </h3>
               </Grid>
             </CardContent>
