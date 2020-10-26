@@ -9,8 +9,8 @@ export default function App() {
   return (
     <>
       <Router>
-        <Route exact path="/landingPage">
-          <LandingPage />
+        <Route exact path="/">
+        <LandingPage />
         </Route>
         <Route exact path="/login">
           <Login />
