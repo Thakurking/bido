@@ -6,10 +6,16 @@ const jwt = require("jsonwebtoken");
 //Database tables
 const User = require("../model/user");
 
+// /**
+//  *@module login
+//  * @param {string} phone - this takes user phone number
+//  * @param {string} password - this takes password from user
+//  */
+
 /**
- *@module login
- * @param {string} phone - this takes user phone number
- * @param {string} password - this takes password from user
+ * 
+ * @param {string} req req have phone password 
+ * @param {Object} res res have response for output
  */
 
 //#region Login router
@@ -27,7 +33,7 @@ exports.login = async (req, res) => {
       isSuccess: false,
     });
   }
-  const isUser = await isUser.findOne({ phone: phone });
+  const isUser = await User.findOne({ phone: phone });
   if (isUser) {
     bcrypt.compare(password, isUser.password, async (err, result) => {
       if (err) {
