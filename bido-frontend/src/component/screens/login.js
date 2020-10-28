@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -11,6 +11,7 @@ import CardContent from "@material-ui/core/CardContent";
 import axios from "axios"
 
 const Signup = () => {
+  const history = useHistory();
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,7 +22,13 @@ const Signup = () => {
         password,
       })
       .then((res) => {
-        console.log(res.data);
+        if(res.data.Error){
+          console.log(res.data.Error)
+        }else{
+          console.log(res.data.message);
+          localStorage.setItem("jwt", res.data.token);
+          history.push("/home");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -84,7 +91,7 @@ const Signup = () => {
                     marginTop: 7,
                   }}
                 >
-                  Signup
+                  Login
                 </Button>
               </Grid>
             </Grid>
