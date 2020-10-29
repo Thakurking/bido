@@ -12,8 +12,7 @@ const User = require("../model/user");
 //#region Controller for post accepted bids from client
 exports.acceptedPost = async (req, res) => {
   //userId will be removed by req.user after setting up middleware
-  const { userId } = req.body;
-  if (!userId) {
+  if (!req.user) {
     return res.json({ message: "User Not Authorized", isSuccess: false });
   }
   const isUser = await User.findOne({ _id: userId });

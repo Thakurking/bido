@@ -27,6 +27,7 @@ const Signup = () => {
         }else{
           console.log(res.data.message);
           localStorage.setItem("jwt", res.data.token);
+          localStorage.setItem("User", res.data.User);
           history.push("/home");
         }
       })

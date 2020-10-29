@@ -120,8 +120,8 @@ exports.signup = async (req, res) => {
                 return res.json({
                   message: "OTP sent to your email plese verify",
                   isSuccess: true,
-                  user: saveUser,
-                  userId: saveUser._id,
+                  user: saveUser._id,
+                  client: saveUser,
                 });
               } else {
                 return res.json({

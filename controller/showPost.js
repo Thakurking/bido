@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const Post = require("../model/post");
 
 exports.showAllPost = async (req, res) => {
+  if(!req.user){
+    return res.json({ message: "Access Denied", isSuccess: false });
+  }
   const { cat } = req.body;
   if (!cat) {
     return res.json({ message: "Category Not Selected", isSuccess: false });

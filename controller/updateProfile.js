@@ -26,16 +26,15 @@ let transporter = nodemailer.createTransport({
 //#region Controller for updating address
 exports.updateAddress = async (req, res) => {
   //userId will be removed by req.user after setting up middleware
-  const { userId } = req.body;
-  if (!userId) {
-    return res.json({ Error: "User Not Authorized", isSuccess: false });
+  if (!req.user) {
+    return res.json({ Error: "Access Denied", isSuccess: false });
   }
   const { address } = req.body;
   if (!address) {
     return res.json({ Error: "Please Provide Address", isSuccess: false });
   }
   const updateProfile = await User.findOneAndUpdate(
-    { _id: userId },
+    { _id: req.user },
     { $set: { address: address } }
   );
   if (updateProfile) {
@@ -59,17 +58,15 @@ exports.updateAddress = async (req, res) => {
 //#region Controller for updating update profile image
 exports.profileUpdate = async (req, res) => {
   //userId will be removed by req.user after setting up middleware
-  console.log("hello");
-  const { userId } = req.body;
-  if (!userId) {
-    return res.json({ Error: "User Not Authorized", isSuccess: false });
+  if (!req.user) {
+    return res.json({ Error: "Access Denied", isSuccess: false });
   }
   const profile = req.file.filename;
   if (!profile) {
     return res.json({ Error: "Please Select Your Profile", isSuccess: false });
   }
   const update = await User.findOneAndUpdate(
-    { _id: userId },
+    { _id: req.user },
     { $set: { profile: profile } }
   );
   if (update) {
@@ -91,8 +88,8 @@ exports.profileUpdate = async (req, res) => {
 //#region Change Password Controller
 exports.changePassword = async (req, res) => {
   //userId will be removed by req.user after setting middleware
-  const { userId, password, cpassword } = req.body;
-  if (userId) {
+  const { password, cpassword } = req.body;
+  if (req.user) {
     if (password !== cpassword) {
       return res.json({ Error: "Password Did Not Matched", isSuccess: false });
     }

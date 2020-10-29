@@ -26,8 +26,11 @@ let transporter = nodemailer.createTransport({
 
 //#region Take Bids From Bidders
 exports.bidsIn = async (req, res) => {
-  const { post, bidder, amount } = req.body;
-  if (!post || !bidder) {
+  if (!req.user) {
+    return res.json({ message: "Access Denied", isSuccess: false });
+  }
+  const { postId, amount } = req.body;
+  if (!postId) {
     return res.json({
       message: "User ID and Post Not Selected",
       isSuccess: false,
@@ -39,38 +42,38 @@ exports.bidsIn = async (req, res) => {
       isSuccess: false,
     });
   }
-  const isUser = await User.findOne({ _id: bidder });
+  const isUser = await User.findOne({ _id: req.user });
   if (!isUser) {
     return res.json({
       message: "User Not Authrozied Please Signup First",
       isSuccess: false,
     });
   }
-  const isSelf = await Post.findOne({ _id: post, postedBy: bidder });
+  const isSelf = await Post.findOne({ _id: postId, postedBy: req.user });
   console.log(isSelf);
   if (isSelf) {
     return res.json({ message: "Cannot Bid On Own Post", isSuccess: false });
   }
-  const isPostStatus = await Post.findOne({ _id: post });
+  const isPostStatus = await Post.findOne({ _id: postId });
   if (isPostStatus.status == "Y") {
     return res.json({
       message: "Post Has Already Accepted Bids",
       isSuccess: false,
     });
   }
-  const isSameBid = await Bids.findOne({ post: post, amount: amount });
+  const isSameBid = await Bids.findOne({ post: postId, amount: amount });
   if (isSameBid) {
     return res.json({
       message: "Cannot bid on the same post with same amount",
       isSuccess: false,
     });
   }
-  const isPost = await Post.findOne({ _id: post });
+  const isPost = await Post.findOne({ _id: postId });
   if (!isPost) {
     return res.json({ message: "Post Not Authorized", isSuccess: false });
   }
   const savePost = await Bids.create({
-    post: post,
+    post: postId,
     bidder: bidder,
     amount: amount,
   });
@@ -93,6 +96,9 @@ exports.bidsIn = async (req, res) => {
 
 //#region Accept bid for client
 exports.acceptBids = async (req, res) => {
+  if(!req.user){
+    return res.json({ message: "Access Denied", isSuccess: false });
+  }
   const { bidId, postId } = req.body;
   if (!bidId) {
     return res.json({ message: "Bid Not Authorized", isSuccess: false });
@@ -107,7 +113,7 @@ exports.acceptBids = async (req, res) => {
   const isPostStatus = await Post.findOne({ _id: postId });
   if (isPostStatus.status == "Y") {
     return res.json({
-      message: "Post Has Already Accepted Bids",
+      message: "You Has Already Accepted Bids",
       isSuccess: false,
     });
   }
@@ -125,7 +131,7 @@ exports.acceptBids = async (req, res) => {
   // );
   const client = await User.findOne({ _id: isPostStatus.postedBy });
   if (!client) {
-    return res.json({ message: "No User Found", isSuccess: false });
+    return res.json({ message: "User Not Authorized", isSuccess: false });
   }
   console.log(isBid.amount);
   const bidNotify = await BidNotify.create({

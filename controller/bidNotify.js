@@ -11,15 +11,10 @@ const BidNotify = require("../model/bidNotification");
 
 //#region Controller for giving notification when clients accepts there bids
 exports.bidNotify = async (req, res) => {
-  /**
-   * bidder will be removed by req.user from the middleware
-   * for getting the current user to find notification and show him/her
-   */
-  const { bidder } = req.body;
-  if (!bidder) {
+  if (!req.user) {
     return res.json({ message: "Not Authorized", isSucccess: false });
   }
-  const isBidder = await User.findOne({ _id: bidder });
+  const isBidder = await User.findOne({ _id: req.user });
   if (!isBidder) {
     return res.json({ message: "Not Authorized", isSucccess: false });
   }

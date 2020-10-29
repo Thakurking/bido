@@ -31,7 +31,7 @@ const Signup = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.isSuccess) {
-          localStorage.setItem("userId", res.data.userId);
+          localStorage.setItem("userId", res.data.user);
           setActive(true);
         }
       })

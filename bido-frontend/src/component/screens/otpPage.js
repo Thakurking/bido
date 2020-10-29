@@ -22,9 +22,8 @@ const Signup = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.isSuccess) {
-            history.push("/home");
+          history.push("/home");
           console.log(res.data.message);
-
         } else {
           console.log(res.data.message);
         }
