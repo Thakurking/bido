@@ -12,43 +12,77 @@ const showAllPost = require("../controller/showPost");
 const profileUpdateController = require("../controller/updateProfile");
 const deletePost = require("../controller/deletePost");
 
+//User JWT Middleware
 const isUser = require("../middleware/userAuth");
+//Multer Middleware
 const photo = require("../middleware/multer");
 
+//#region signup and otp verificationn router
 router.post("/signup", signupController.signup);
 router.post("/verifyOTP", signupController.verifyOTP);
+//#endregion
 
+//#region Login router
 router.post("/login", loginController.login);
+//#endregion
 
+//#region Bid post create router
 router.post(
   "/createPost",
+  isUser,
   photo.upload.array("photo"),
   postController.createPost
 );
-router.post("/bidsIn", bidsController.bidsIn);
-router.post("/acceptBids", bidsController.acceptBids);
+//#endregion
 
-router.get("/acceptedPost", postHistoryController.acceptedPost);
-router.get("/ongoingPost", postHistoryController.ongoingPost);
+//#region Give Bids and accept Bids Router
+router.post("/bidsIn", isUser, bidsController.bidsIn);
+router.post("/acceptBids", isUser, bidsController.acceptBids);
+//#endregion
 
-router.get("/acceptedBids", bidHistoryController.acceptedBids);
-router.get("/ongoingBids", bidHistoryController.ongoingBids);
+//#region Post Accepted Bids And Post Not Accepted bids
+router.get("/acceptedPost", isUser, postHistoryController.acceptedPost);
+router.get("/ongoingPost", isUser, postHistoryController.ongoingPost);
+//#endregion
 
-router.get("/bidNotify", bidNotify.bidNotify);
+//#region Bids Accepted and Bids not Accepted
+router.get("/acceptedBids", isUser, bidHistoryController.acceptedBids);
+router.get("/ongoingBids", isUser, bidHistoryController.ongoingBids);
+//#endregion
 
-router.get("/showAllPost", showAllPost.showAllPost);
+//#region Bids Notification
+router.get("/bidNotify", isUser, bidNotify.bidNotify);
+//#endregion
 
-router.post("/updateAddress", profileUpdateController.updateAddress);
+//#region Show all post
+router.get("/showAllPost", isUser, showAllPost.showAllPost);
+//#endregion
+
+//#region Update Address
+router.post("/updateAddress", isUser, profileUpdateController.updateAddress);
+//#endregion
+
+//#region Update Profile Photo
 router.post(
   "/profileUpdate",
   photo.upload.single("profile"),
   profileUpdateController.profileUpdate
 );
-router.post("/changePassword", profileUpdateController.changePassword);
+//#endregion
+
+//#region Change Password Router
+router.post("/changePassword", isUser, profileUpdateController.changePassword);
+//#endregion
+
+//#region Change Passowrd Via Otp
 router.post(
   "/changePasswordViaOTP",
   profileUpdateController.changePasswordViaOTP
 );
+//#endregion
 
-router.delete("/deletePost", deletePost.deletePost);
+//#region Delete Bis Post
+router.delete("/deletePost", isUser, deletePost.deletePost);
+//#endregion
+
 module.exports = router;
