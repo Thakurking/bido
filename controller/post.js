@@ -14,11 +14,11 @@ exports.acceptedPost = async (req, res) => {
   //userId will be removed by req.user after setting up middleware
   const { userId } = req.body;
   if (!userId) {
-    return res.json({ Error: "User Not Authorized", isSuccess: false });
+    return res.json({ message: "User Not Authorized", isSuccess: false });
   }
   const isUser = await User.findOne({ _id: userId });
   if (!isUser) {
-    return res.json({ Error: "Please Signup First", isSuccess: false });
+    return res.json({ message: "Please Signup First", isSuccess: false });
   }
   const allPost = await Post.find({ postedBy: userId, status: "Y" });
   console.log(allPost);
@@ -43,11 +43,11 @@ exports.ongoingPost = async (req, res) => {
   //userId will be removed by req.user after settingup middleware
   const { userId } = req.body;
   if (!userId) {
-    return res.json({ Error: "Not Authorized", isSuccess: false });
+    return res.json({ message: "Not Authorized", isSuccess: false });
   }
   const isUser = await User.findOne({ _id: userId });
   if (!isUser) {
-    return res.json({ Error: "please Signup First", isSuccess: false });
+    return res.json({ message: "please Signup First", isSuccess: false });
   }
   const allPost = await Post.find({ postedBy: userId, status: "N" });
   console.log(allPost);

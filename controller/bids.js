@@ -29,42 +29,45 @@ exports.bidsIn = async (req, res) => {
   const { post, bidder, amount } = req.body;
   if (!post || !bidder) {
     return res.json({
-      Error: "User ID and Post Not Selected",
+      message: "User ID and Post Not Selected",
       isSuccess: false,
     });
   }
   if (!amount || typeof amount != "number") {
-    return res.json({ Error: "Please Enter Your Bid Money", isSuccess: false });
+    return res.json({
+      message: "Please Enter Your Bid Money",
+      isSuccess: false,
+    });
   }
   const isUser = await User.findOne({ _id: bidder });
   if (!isUser) {
     return res.json({
-      Error: "User Not Authrozied Please Signup First",
+      message: "User Not Authrozied Please Signup First",
       isSuccess: false,
     });
   }
   const isSelf = await Post.findOne({ _id: post, postedBy: bidder });
   console.log(isSelf);
   if (isSelf) {
-    return res.json({ Error: "Cannot Bid On Own Post", isSuccess: false });
+    return res.json({ message: "Cannot Bid On Own Post", isSuccess: false });
   }
   const isPostStatus = await Post.findOne({ _id: post });
   if (isPostStatus.status == "Y") {
     return res.json({
-      Error: "Post Has Already Accepted Bids",
+      message: "Post Has Already Accepted Bids",
       isSuccess: false,
     });
   }
   const isSameBid = await Bids.findOne({ post: post, amount: amount });
   if (isSameBid) {
     return res.json({
-      Error: "Cannot bid on the same post with same amount",
+      message: "Cannot bid on the same post with same amount",
       isSuccess: false,
     });
   }
   const isPost = await Post.findOne({ _id: post });
   if (!isPost) {
-    return res.json({ Error: "Post Not Authorized", isSuccess: false });
+    return res.json({ message: "Post Not Authorized", isSuccess: false });
   }
   const savePost = await Bids.create({
     post: post,
@@ -92,19 +95,19 @@ exports.bidsIn = async (req, res) => {
 exports.acceptBids = async (req, res) => {
   const { bidId, postId } = req.body;
   if (!bidId) {
-    return res.json({ Error: "Bid Not Authorized", isSuccess: false });
+    return res.json({ message: "Bid Not Authorized", isSuccess: false });
   }
   if (!postId) {
-    return res.json({ Error: "Post Not Selected", isSuccess: false });
+    return res.json({ message: "Post Not Selected", isSuccess: false });
   }
   const isBid = await Bids.findOne({ _id: bidId });
   if (isBid.status == "Y") {
-    return res.json({ Error: "Bid Already Accepted", isSuccess: false });
+    return res.json({ message: "Bid Already Accepted", isSuccess: false });
   }
   const isPostStatus = await Post.findOne({ _id: postId });
   if (isPostStatus.status == "Y") {
     return res.json({
-      Error: "Post Has Already Accepted Bids",
+      message: "Post Has Already Accepted Bids",
       isSuccess: false,
     });
   }
@@ -122,7 +125,7 @@ exports.acceptBids = async (req, res) => {
   // );
   const client = await User.findOne({ _id: isPostStatus.postedBy });
   if (!client) {
-    return res.json({ Error: "No User Found", isSuccess: false });
+    return res.json({ message: "No User Found", isSuccess: false });
   }
   console.log(isBid.amount);
   const bidNotify = await BidNotify.create({
@@ -156,7 +159,7 @@ exports.acceptBids = async (req, res) => {
       }
     });
   } else {
-    return res.json({ Error: "Somethign Went Wrong", isSuccess: false });
+    return res.json({ message: "Somethign Went Wrong", isSuccess: false });
   }
 };
 //#endregion

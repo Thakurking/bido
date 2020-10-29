@@ -33,18 +33,18 @@ exports.signup = async (req, res) => {
   const { name, phone, email, password, cpassword } = req.body;
   if (!name || !email || !phone || !password || !cpassword) {
     return res.json({
-      Error: "Please Provide All The Details",
+      message: "Please Provide All The Details",
       isSuccess: false,
     });
   }
   if (!validator.isMobilePhone(phone)) {
     return res.json({
-      Error: "Please Enter Valid Phone Number",
+      message: "Please Enter Valid Phone Number",
       isSuccess: false,
     });
   }
   if (!validator.isEmail(email)) {
-    return res.json({ Error: "Please Enter Valid Email", isSuccess: false });
+    return res.json({ message: "Please Enter Valid Email", isSuccess: false });
   }
   if (
     !validator.matches(
@@ -53,30 +53,30 @@ exports.signup = async (req, res) => {
     )
   ) {
     return res.json({
-      Error: "Password must contain a uppercse, digit, lowercase",
+      message: "Password must contain a uppercse, digit, lowercase",
       isSuccess: false,
     });
   }
   if (!validator.matches(password, cpassword)) {
     return res.json({
-      Error: "Password Does Not Match Please Enter Same Password",
+      message: "Password Does Not Match Please Enter Same Password",
       isSuccess: false,
     });
   }
   const isPhoneExist = await User.findOne({ phone: phone });
   if (isPhoneExist) {
     return res.json({
-      Error: "User Already Exist Please Try With Another Phone Number",
+      message: "User Already Exist Please Try With Another Phone Number",
       isSuccess: false,
     });
   }
-  const isEmailExist = await User.findOne({ email: email });
-  if (isEmailExist) {
-    return res.json({
-      Error: "User Already Exist Please Try With Another Email",
-      isSuccess: false,
-    });
-  }
+  // const isEmailExist = await User.findOne({ email: email });
+  // if (isEmailExist) {
+  //   return res.json({
+  //     message: "User Already Exist Please Try With Another Email",
+  //     isSuccess: false,
+  //   });
+  // }
   const otpNum = Math.floor(Math.random() * 10000 + 1);
   const mailoption = {
     from: process.env.user,
@@ -110,7 +110,7 @@ exports.signup = async (req, res) => {
               const saveUser = await user.save();
               console.log(saveUser);
               const otp = new OTP({
-                userId: saveUser._id,
+                user: saveUser._id,
                 otp: otpNum,
                 usedFor: "account activation",
               });
@@ -121,10 +121,11 @@ exports.signup = async (req, res) => {
                   message: "OTP sent to your email plese verify",
                   isSuccess: true,
                   user: saveUser,
+                  userId: saveUser._id,
                 });
               } else {
                 return res.json({
-                  Error: "Failed To Save OTP Please Try Again",
+                  message: "Failed To Save OTP Please Try Again",
                   isSuccess: false,
                 });
               }
@@ -151,14 +152,14 @@ exports.signup = async (req, res) => {
 //#region OTP Verification router
 exports.verifyOTP = async (req, res) => {
   const { otp, userId } = req.body;
-  if (!otp || !userId) {
-    return res.json({ Error: "Please Enter OTP", isSuccess: false });
+  if (!otp) {
+    return res.json({ message: "Please Enter OTP", isSuccess: false });
   }
-  const isOTP = await OTP.findOne({ userId: userId, otp: otp });
+  const isOTP = await OTP.findOne({ user: userId, otp: otp });
   if (isOTP) {
-    if (isOTP.status === 1) {
+    if (isOTP.status == 1) {
       const updateOTP = await OTP.updateOne(
-        { userId: userId, otp: otp },
+        { user: userId, otp: otp },
         { $set: { status: 2 } }
       );
       const updateUser = await User.updateOne(
@@ -176,10 +177,10 @@ exports.verifyOTP = async (req, res) => {
         }
       }
     }
-    if (isOTP.status === 2) {
-      return res.json({ Error: "OTP Already Verified", isSuccess: false });
+    if (isOTP.status == 2) {
+      return res.json({ message: "OTP Already Verified", isSuccess: false });
     }
   }
-  return res.json({ Error: "Please Enter Valid OTP", isSuccess: false });
+  return res.json({ message: "Please Enter Valid OTP", isSuccess: false });
 };
 //#endregion

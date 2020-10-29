@@ -20,7 +20,7 @@ exports.createPost = async (req, res) => {
   const cat = req.body.cat;
   console.log(cat);
   if (!cat) {
-    return res.json({ Error: "Category Not Selected", isSuccess: false });
+    return res.json({ message: "Category Not Selected", isSuccess: false });
   }
   if (cat == 1) {
     catering(req, res);

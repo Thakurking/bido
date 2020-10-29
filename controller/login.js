@@ -13,8 +13,8 @@ const User = require("../model/user");
 //  */
 
 /**
- * 
- * @param {string} req req have phone password 
+ *
+ * @param {string} req req have phone password
  * @param {Object} res res have response for output
  */
 
@@ -23,13 +23,13 @@ exports.login = async (req, res) => {
   const { phone, password } = req.body;
   if (!phone || !password) {
     return res.json({
-      Error: "Please Provide All The Details",
+      message: "Please Provide All The Details",
       isSuccess: false,
     });
   }
   if (!validator.isMobilePhone(phone)) {
     return res.json({
-      Error: "Please Enter A Valid Mobile Number",
+      message: "Please Enter A Valid Mobile Number",
       isSuccess: false,
     });
   }
@@ -38,13 +38,13 @@ exports.login = async (req, res) => {
     bcrypt.compare(password, isUser.password, async (err, result) => {
       if (err) {
         return res.json({
-          Error: "Something went wrong please try again",
+          message: "Something went wrong please try again",
           isSuccess: false,
         });
       }
       if (result !== true) {
         return res.json({
-          Error: "Wrong Email Or Password Please Try Aain",
+          message: "Wrong Email Or Password Please Try Aain",
           isSuccess: false,
         });
       }
@@ -64,7 +64,7 @@ exports.login = async (req, res) => {
       });
     });
   } else {
-    return res.json({ Error: "User Not Found", isSuccess: false });
+    return res.json({ message: "User Not Found", isSuccess: false });
   }
 };
 //#endregion

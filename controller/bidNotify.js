@@ -17,11 +17,11 @@ exports.bidNotify = async (req, res) => {
    */
   const { bidder } = req.body;
   if (!bidder) {
-    return res.json({ Error: "Not Authorized", isSucccess: false });
+    return res.json({ message: "Not Authorized", isSucccess: false });
   }
   const isBidder = await User.findOne({ _id: bidder });
   if (!isBidder) {
-    return res.json({ Error: "Not Authorized", isSucccess: false });
+    return res.json({ message: "Not Authorized", isSucccess: false });
   }
   const notification = await BidNotify.find({ bidder: bidder });
   if (notification.length > 0) {
@@ -32,7 +32,7 @@ exports.bidNotify = async (req, res) => {
     });
   } else {
     return res.json({
-      Error: "You Do Not Have Any Notification Yet",
+      message: "You Do Not Have Any Notification Yet",
       isSucccess: false,
     });
   }

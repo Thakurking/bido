@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import axios from "axios";
+import OtpPage from "../screens/otpPage";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -16,6 +17,8 @@ const Signup = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setPass] = useState("");
+  const [active, setActive] = useState("");
+
   const postData = () => {
     axios
       .post("/signup", {
@@ -26,10 +29,10 @@ const Signup = () => {
         cpassword,
       })
       .then((res) => {
-        if(res.data.Error){
-          console.log(res.data.Error);
-        }else{
-          console.log(res.data.message);
+        console.log(res.data);
+        if (res.data.isSuccess) {
+          localStorage.setItem("userId", res.data.userId);
+          setActive(true);
         }
       })
       .catch((err) => {
@@ -117,7 +120,9 @@ const Signup = () => {
                   variant="contained"
                   color="secondary"
                   size="large"
-                  onClick={() => postData()}
+                  onClick={() => {
+                    postData();
+                  }}
                   style={{
                     fontSize: 15,
                     marginTop: 7,
@@ -142,6 +147,7 @@ const Signup = () => {
             </Grid>
           </CardContent>
         </Card>
+        {active === true && <OtpPage />}
       </Container>
     </React.Fragment>
   );

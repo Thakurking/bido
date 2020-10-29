@@ -6,7 +6,7 @@ const Post = require("../model/post");
 exports.showAllPost = async (req, res) => {
   const { cat } = req.body;
   if (!cat) {
-    return res.json({ Error: "Category Not Selected", isSuccess: false });
+    return res.json({ message: "Category Not Selected", isSuccess: false });
   }
   if (cat == 1) {
     const catering = await Post.find({ category: 1 }).select(
@@ -21,7 +21,7 @@ exports.showAllPost = async (req, res) => {
       });
     } else {
       return res.json({
-        Error: "Somethign Went Wrong Please Try Again",
+        message: "Somethign Went Wrong Please Try Again",
         isSuccess: false,
       });
     }
@@ -39,7 +39,7 @@ exports.showAllPost = async (req, res) => {
       });
     } else {
       return res.json({
-        Error: "Something Went Wrong Please Try Again",
+        message: "Something Went Wrong Please Try Again",
         isSuccess: false,
       });
     }
@@ -57,7 +57,7 @@ exports.showAllPost = async (req, res) => {
       });
     } else {
       return res.json({
-        Error: "Somwthing Went Wrong Please Try Again",
+        message: "Somwthing Went Wrong Please Try Again",
         isSuccess: false,
       });
     }
@@ -75,7 +75,7 @@ exports.showAllPost = async (req, res) => {
       });
     } else {
       return res.json({
-        Error: "Something Went Wrong Please Try Again",
+        message: "Something Went Wrong Please Try Again",
         isSuccess: false,
       });
     }
