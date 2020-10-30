@@ -59,19 +59,34 @@ export default function NavBar(){
               <h3>about</h3>
             </div>
           ) : (
-            <div style={{ height: "100%", padding: "20px" }}>
-              <IconButton color="inherit" aria-label="logout">
-                <ul>
-                  <li>
-                    <h4>Logout</h4>
-                    <ExitToAppIcon style={{ fontSize: 30 }} />
-                  </li>
-                  <li>
-                    <h4>Profile</h4>
-                    <AccountBoxIcon style={{ fontSize: 30 }} />
-                  </li>
-                </ul>
-              </IconButton>
+            <div
+              style={{
+                height: "100%",
+                padding: "20px",
+              }}
+            >
+              <Button
+                variant="contained"
+                style={{
+                  borderRadius: 10,
+                  fontSize: 17,
+                }}
+                color="primary"
+              >
+                Logout
+                <ExitToAppIcon />
+              </Button>
+              <Button
+                variant="contained"
+                style={{
+                  borderRadius: 10,
+                  fontSize: 17,
+                }}
+                color="primary"
+              >
+                Profile
+                <AccountBoxIcon />
+              </Button>
             </div>
           )}
         </div>
