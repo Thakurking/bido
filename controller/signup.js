@@ -65,18 +65,34 @@ exports.signup = async (req, res) => {
   }
   const isPhoneExist = await User.findOne({ phone: phone });
   if (isPhoneExist) {
+    if(isPhoneExist.status== "N"){
+      return res.json({
+        message: "Compleate Your OTP Verification",
+        isOTP: false,
+        user: isPhoneExist._id,
+        isSuccess: true,
+      });
+    }
     return res.json({
       message: "User Already Exist Please Try With Another Phone Number",
       isSuccess: false,
     });
   }
-  // const isEmailExist = await User.findOne({ email: email });
-  // if (isEmailExist) {
-  //   return res.json({
-  //     message: "User Already Exist Please Try With Another Email",
-  //     isSuccess: false,
-  //   });
-  // }
+  const isEmailExist = await User.findOne({ email: email });
+  if (isEmailExist) {
+    if(isEmailExist.status == "N"){
+      return res.json({
+        message: "Compleate Your OTP Verification",
+        isOTP: false,
+        user: isEmailExist._id,
+        isSuccess: true,
+      });
+    }
+    return res.json({
+      message: "User Already Exist Please Try With Another Email",
+      isSuccess: false,
+    });
+  }
   const otpNum = Math.floor(Math.random() * 10000 + 1);
   const mailoption = {
     from: process.env.user,
@@ -122,6 +138,7 @@ exports.signup = async (req, res) => {
                   isSuccess: true,
                   user: saveUser._id,
                   client: saveUser,
+                  isOTP: true,
                 });
               } else {
                 return res.json({

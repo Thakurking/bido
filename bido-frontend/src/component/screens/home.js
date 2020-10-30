@@ -1,10 +1,11 @@
 import React from 'react'
+import NavBar from "../screens/navScreen";
 
 export default function home() {
-  console.log(localStorage.getItem("jwt"));
-    return (
-      <div>
-        <h1>This is home page</h1>
-      </div>
-    );
+  return (
+    <div>
+      <NavBar />
+      <h1>This is home page</h1>
+    </div>
+  );
 }

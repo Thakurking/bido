@@ -32,7 +32,12 @@ const Signup = () => {
         console.log(res.data);
         if (res.data.isSuccess) {
           localStorage.setItem("userId", res.data.user);
-          setActive(true);
+          if(res.data.isOTP == false){
+            setActive(true);
+          }
+          if(res.data.isOTP == true){
+            setActive(true);
+          }
         }
       })
       .catch((err) => {
