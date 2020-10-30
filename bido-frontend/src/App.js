@@ -5,6 +5,9 @@ import LandingPage from "./component/landingPage";
 import Login from "./component/screens/login";
 import Signup from "./component/screens/signup";
 import Home from "./component/screens/home";
+
+import Protected from "./component/protectedRoutes/protectedRoutes";
+
 export default function App() {
   return (
     <>
@@ -18,9 +21,7 @@ export default function App() {
         <Route exact path="/signup">
           <Signup />
         </Route>
-        <Route exact path="/home">
-          <Home />
-        </Route>
+        <Protected exact path="/home" component={Home} />
       </Router>
     </>
   );
