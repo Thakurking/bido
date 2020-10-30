@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from "../screens/navScreen";
+import NavBar from "./NavBar";
 
 export default function home() {
   return (

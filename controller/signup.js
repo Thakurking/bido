@@ -65,7 +65,7 @@ exports.signup = async (req, res) => {
   }
   const isPhoneExist = await User.findOne({ phone: phone });
   if (isPhoneExist) {
-    if(isPhoneExist.status== "N"){
+    if (isPhoneExist.status == "N") {
       return res.json({
         message: "Compleate Your OTP Verification",
         isOTP: false,
@@ -80,7 +80,7 @@ exports.signup = async (req, res) => {
   }
   const isEmailExist = await User.findOne({ email: email });
   if (isEmailExist) {
-    if(isEmailExist.status == "N"){
+    if (isEmailExist.status == "N") {
       return res.json({
         message: "Compleate Your OTP Verification",
         isOTP: false,
