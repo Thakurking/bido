@@ -68,9 +68,9 @@ exports.signup = async (req, res) => {
     if (isPhoneExist.status == "N") {
       return res.json({
         message: "Compleate Your OTP Verification",
-        isOTP: false,
+        isOTP: true,
         user: isPhoneExist._id,
-        isSuccess: true,
+        isSuccess: false,
       });
     }
     return res.json({
@@ -83,9 +83,9 @@ exports.signup = async (req, res) => {
     if (isEmailExist.status == "N") {
       return res.json({
         message: "Compleate Your OTP Verification",
-        isOTP: false,
+        isOTP: true,
         user: isEmailExist._id,
-        isSuccess: true,
+        isSuccess: false,
       });
     }
     return res.json({

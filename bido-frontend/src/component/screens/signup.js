@@ -9,6 +9,8 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 import OtpPage from "../screens/otpPage";
 
 const Signup = () => {
@@ -18,6 +20,18 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [cpassword, setPass] = useState("");
   const [active, setActive] = useState("");
+
+  const toast = Swal.minxin({
+    toast: true,
+    position: "top",
+    width: "100vw",
+    showConfirmButton: false,
+    timer: 3000,
+    onOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   const postData = () => {
     axios
@@ -32,12 +46,23 @@ const Signup = () => {
         console.log(res.data);
         if (res.data.isSuccess) {
           localStorage.setItem("userId", res.data.user);
-          if(res.data.isOTP == false){
-            setActive(true);
-          }
-          if(res.data.isOTP == true){
-            setActive(true);
-          }
+          toast.fire({
+            icon: "success",
+            title: res.data.message,
+          });
+        }
+        if (res.data.isOTP) {
+          localStorage.getItem("userId", res.data.user);
+          toast.fire({
+            icon: "success",
+            title: res.data.message,
+          });
+        }
+        if (!res.data.isSuccess) {
+          toast.fire({
+            icon: "warning",
+            title: res.data.message,
+          });
         }
       })
       .catch((err) => {
