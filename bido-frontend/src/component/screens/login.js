@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import axios from "axios"
+import axios from "axios";
 
 const Signup = () => {
   const history = useHistory();
@@ -22,12 +22,9 @@ const Signup = () => {
         password,
       })
       .then((res) => {
-        if(res.data.Error){
-          console.log(res.data.Error)
-        }else{
-          console.log(res.data.message);
+        if(res.data.isSuccess){
           localStorage.setItem("jwt", res.data.token);
-          localStorage.setItem("User", res.data.User);
+          localStorage.setItem("User", JSON.stringify(res.data.User));
           history.push("/home");
         }
       })
