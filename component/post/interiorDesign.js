@@ -5,9 +5,7 @@ const Post = require("../../model/post");
 
 //#region interior Design module for createPost controller
 module.exports = async (req, res) => {
-  //userId will going to be removed by the req.user when the middleware will going to setup
-  const { userId } = req.body;
-  if (!userId) {
+  if (!req.user) {
     return res.json({ Error: "Not Authorized", isSuccess: false });
   }
   const { isFloor, isCeiling, notes, rooms } = req.body;
@@ -39,7 +37,7 @@ module.exports = async (req, res) => {
   };
   const savePost = await Post.create({
     interiorDesign,
-    postedBy: userId,
+    postedBy: req.user,
     category: req.body.cat,
   });
   console.log(savePost);

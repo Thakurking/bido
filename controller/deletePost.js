@@ -9,7 +9,6 @@ const Post = require("../model/post");
  */
 
 exports.deletePost = async (req, res) => {
-  //userId will be removed by req.user after setting up middleware
   if (!req.user) {
     return res.json({ message: "Not Authorized", isSuccess: false });
   }

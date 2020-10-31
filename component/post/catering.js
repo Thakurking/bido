@@ -7,9 +7,7 @@ const User = require("../../model/user");
 
 //#region catering module for createPost controller
 module.exports = async (req, res) => {
-  //userId will going to be removed by the req.user when the middleware will going to setup
-  const { userId } = req.body;
-  if (!userId) {
+  if (!req.user) {
     return res.json({ Error: "Not Authorized", isSuccess: false });
   }
   const {
@@ -65,7 +63,7 @@ module.exports = async (req, res) => {
   };
   const savePost = await Post.create({
     catering,
-    postedBy: userId,
+    postedBy: req.user,
     category: req.body.cat,
   });
   console.log(savePost);

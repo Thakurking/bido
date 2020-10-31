@@ -5,12 +5,10 @@ const Post = require("../../model/post");
 
 //#region shipping module for createPost controller
 module.exports = async (req, res) => {
-  //userId will going to be removed by the req.user when the middleware will going to setup
-  const { userId } = req.body;
-  if (!userId) {
+  if (!req.user) {
     return res.json({ Error: "Not Authorized", isSuccess: false });
   }
-  const { weight, notes, size, prefVehicle, product } = req.body;
+  const { weight, notes, size, prefVehicle, productDetail } = req.body;
   const { from } = req.body;
   console.log(from);
   const { to } = req.body;
@@ -23,7 +21,7 @@ module.exports = async (req, res) => {
   }
   if (!to) {
     return res.json({
-      Error: "Please Enter Destination Location",
+      Error: "Please Enter Destination",
       isSuccess: false,
     });
   }
@@ -54,7 +52,7 @@ module.exports = async (req, res) => {
       isSuccess: false,
     });
   }
-  if (!product) {
+  if (!productDetail) {
     return res.json({
       Error: "Please Add The Shipping Product Detail",
       isSuccess: false,
@@ -67,15 +65,14 @@ module.exports = async (req, res) => {
     notes: notes,
     size: size,
     prefVehicle: prefVehicle,
-    product: product,
+    productDetail: productDetail,
     // photo: photo,
   };
   const savePost = await Post.create({
     shipping,
-    postedBy: userId,
+    postedBy: req.user,
     category: req.body.cat,
   });
-  console.log(savePost);
   if (savePost) {
     return res.json({
       message: "Your Post Submited",

@@ -50,8 +50,10 @@ const Signup = () => {
             icon: "success",
             title: res.data.message,
           });
+          setActive(true);
         }
         if (res.data.isOTP) {
+          setActive(true)
           localStorage.getItem("userId", res.data.user);
           toast.fire({
             icon: "success",
