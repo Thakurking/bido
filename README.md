@@ -1,5 +1,5 @@
 # Bido
-Bido is a online bidding application for both user and freelancer to give a post for bid and accept bid on four
+Bido is an online bidding application for both user and freelancer to give a post for bid and accept bid on four
 different services such as Catering, Shipping, Interior Design and Construction.
 # Usage
 ## User :-
