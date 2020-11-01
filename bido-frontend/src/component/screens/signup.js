@@ -21,13 +21,13 @@ const Signup = () => {
   const [cpassword, setPass] = useState("");
   const [active, setActive] = useState("");
 
-  const toast = Swal.minxin({
+  const toast = Swal.mixin({
     toast: true,
     position: "top",
     width: "100vw",
     showConfirmButton: false,
     timer: 3000,
-    onOpen: (toast) => {
+    didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },

@@ -134,7 +134,7 @@ exports.signup = async (req, res) => {
               console.log(saveOTP);
               if (saveOTP && saveUser) {
                 return res.json({
-                  message: "OTP sent to your email plese verify",
+                  message: "OTP sent to your email",
                   isSuccess: true,
                   user: saveUser._id,
                   client: saveUser,
