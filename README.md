@@ -30,3 +30,5 @@ also extra notes for bidders and also location of the user.
 ## Construction
 This is for the Construction related service user can give map of there construction project and landarea and numbers of room, bathroom, kitchen, hall
 and there location of the construction site.
+## Tools and Technologies
+This application uses Node.js React.js Socket.IO Express.js And MongoDB for database
