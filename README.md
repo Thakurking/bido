@@ -1,9 +1,9 @@
 # Bido
-Bido is a online bidding application for both user and freelancer to give a post for bid and accept bid on four
+Bido is an online bidding application for both user and freelancer to give a post for bid and accept bid on four
 different services such as Catering, Shipping, Interior Design and Construction.
 # Usage
 ## User :-
-User can bid a post on any of the different categories shown above and then accept 
+User can post a bid on any of the different categories shown above and then accept 
 bids from different bidders and then they can contact each other.
 User can also bid on different users post.
 ## Bidder :-
@@ -12,7 +12,7 @@ and if any user accepts there bids they will get information via email and the u
 and the post details of the bids.
 Bidder can also give post for different biders for own services
 # Services..
-This service is related to the bids postes by the user which is Catering, Shipping, Interior Design, Construction.
+This service is related to the bids postes by the user which is Catering, Shipping, Interior Design, Construction, and bidders will bid on these services.
 ## Catering
 This service is related to catering fields user can share catering details and bidder who are looking for catering work they can bid and if there bids
 got accepted they can contact the user who posted the bids but the user have to pust some details in order to post a Catering post 
