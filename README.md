@@ -31,6 +31,7 @@ also extra notes for bidders and also location of the user.
 This is for the Construction related service user can give map of there construction project and landarea and numbers of room, bathroom, kitchen, hall
 and there location of the construction site.
 ## Bidding
-Clients can bid live on the bid section on other clients post on different services
+Clients can bid live on the bid section on other clients post on different services.
+And can view other bids from other clients.
 ## Tools and Technologies
 This application uses Node.js for backend React.js for frontend and Express.js for node framework And MongoDB for database and also socket.IO for real time bidding 
