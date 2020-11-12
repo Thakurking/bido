@@ -294,7 +294,7 @@ const postSchema = new Schema({
   },
   /**
    * N for showing post untill bidder not accepted from the user
-   * Y for accepting the bidder bid and not showing as post anywhere to any bidder
+   * Y for accepting the bidder's bid and not showing as post anywhere to any bidder
    * then only show in accepted bid history
    */
   status: {

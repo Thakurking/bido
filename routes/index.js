@@ -11,6 +11,7 @@ const bidNotify = require("../controller/bidNotify");
 const showAllPost = require("../controller/showPost");
 const profileUpdateController = require("../controller/updateProfile");
 const deletePost = require("../controller/deletePost");
+const todayAcceptedBids = require("../controller/todayAcceptedBids");
 
 //User JWT Middleware
 const isUser = require("../middleware/userAuth");
@@ -83,6 +84,10 @@ router.post(
 
 //#region Delete Bis Post
 router.delete("/deletePost", isUser, deletePost.deletePost);
+//#endregion
+
+//#region Show All The Bids Accepted Today
+router.get("/todayBids", isUser, todayAcceptedBids.todayBids);
 //#endregion
 
 module.exports = router;
