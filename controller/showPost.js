@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Post = require("../model/post");
 
 exports.showAllPost = async (req, res) => {
-  if(!req.user){
+  if (!req.user) {
     return res.json({ message: "Access Denied", isSuccess: false });
   }
   const { cat } = req.body;
@@ -13,7 +13,7 @@ exports.showAllPost = async (req, res) => {
   }
   if (cat == 1) {
     const catering = await Post.find({ category: 1 }).select(
-      "catering postedOn status"
+      "catering postedOn status postedBy"
     );
     console.log(catering);
     if (catering) {
@@ -31,7 +31,7 @@ exports.showAllPost = async (req, res) => {
   }
   if (cat == 2) {
     const shipping = await Post.find({ category: 2 }).select(
-      "shipping postedOn status"
+      "shipping postedOn status postedBy"
     );
     console.log(shipping);
     if (shipping) {
@@ -49,7 +49,7 @@ exports.showAllPost = async (req, res) => {
   }
   if (cat == 3) {
     const interiorDesign = await Post.find({ category: 3 }).select(
-      "interiorDesign postedOn status"
+      "interiorDesign postedOn status postedBy"
     );
     console.log(interiorDesign);
     if (interiorDesign) {
@@ -67,7 +67,7 @@ exports.showAllPost = async (req, res) => {
   }
   if (cat == 4) {
     const construction = await Post.find({ category: 4 }).select(
-      "construction postedOn status"
+      "construction postedOn status postedBy"
     );
     console.log(construction);
     if (construction) {

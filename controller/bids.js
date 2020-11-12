@@ -96,7 +96,7 @@ exports.bidsIn = async (req, res) => {
 
 //#region Accept bid for client
 exports.acceptBids = async (req, res) => {
-  if(!req.user){
+  if (!req.user) {
     return res.json({ message: "Access Denied", isSuccess: false });
   }
   const { bidId, postId } = req.body;
