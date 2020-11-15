@@ -35,3 +35,5 @@ Clients can bid live on the bid section on other clients post on different servi
 And can view other clients live post and bids.
 # Tools and Technologies
 This application uses Node.js for backend React.js for frontend and Express.js for node framework And MongoDB for database and also socket.IO for real time bidding 
+# Developer
+Bharat Software Systems
