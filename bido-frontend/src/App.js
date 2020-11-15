@@ -5,6 +5,7 @@ import LandingPage from "./component/landingPage";
 import Login from "./component/screens/login";
 import Signup from "./component/screens/signup";
 import Home from "./component/screens/home";
+import LiveBid from "./component/screens/liveBid";
 
 import Protected from "./component/protectedRoutes/protectedRoutes";
 
@@ -22,6 +23,7 @@ export default function App() {
           <Signup />
         </Route>
         <Protected exact path="/home" component={Home} />
+        <Protected exact path="/liveBid" component={LiveBid} />
       </Router>
     </>
   );
