@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const CronJob = require("cron").CronJob;
 
 //Database table
 const User = require("../model/user");
@@ -68,3 +69,14 @@ exports.ongoingBids = async (req, res) => {
   }
 };
 //#endregion
+
+var job = new CronJob(
+  "5 * * * * *",
+  function () {
+    console.log("You will see this message every second");
+  },
+  null,
+  true,
+  "Asia/Kolkata"
+);
+job.start();
