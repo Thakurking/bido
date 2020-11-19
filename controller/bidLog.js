@@ -70,13 +70,13 @@ exports.ongoingBids = async (req, res) => {
 };
 //#endregion
 
-var job = new CronJob(
-  "5 * * * * *",
-  function () {
-    console.log("You will see this message every second");
-  },
-  null,
-  true,
-  "Asia/Kolkata"
-);
-job.start();
+// var job = new CronJob(
+//   "5 * * * * *",
+//   function () {
+//     console.log("You will see this message every second");
+//   },
+//   null,
+//   true,
+//   "Asia/Kolkata"
+// );
+// job.start();
