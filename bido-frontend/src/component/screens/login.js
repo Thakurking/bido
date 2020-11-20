@@ -9,11 +9,24 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const history = useHistory();
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+
+  const toast = Swal.mixin({
+    toast: true,
+    position: "top",
+    width: "100vw",
+    showConfirmButton: false,
+    timer: 3000,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   const postData = () => {
     axios
@@ -25,7 +38,16 @@ const Signup = () => {
         if(res.data.isSuccess){
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("User", JSON.stringify(res.data.User));
+          toast.fire({
+            icon: "success",
+            title: res.data.message,
+          });
           history.push("/home");
+        }else{
+          toast.fire({
+            icon: "warning",
+            title: res.data.message,
+          });
         }
       })
       .catch((err) => {

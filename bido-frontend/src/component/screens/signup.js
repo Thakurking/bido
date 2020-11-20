@@ -36,7 +36,7 @@ const Signup = () => {
   const postData = () => {
     axios
       .post("/signup", {
-        name,
+        name, 
         email,
         phone,
         password,
