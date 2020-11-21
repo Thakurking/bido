@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const index = require("./routes/index");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
 const mongoose = require("mongoose");
 
 // parse application/x-www-form-urlencoded
@@ -12,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+//Parser Cookie
+app.use(cookieParser())
 
 app.use(express.static("public"));
 app.use("/", index);

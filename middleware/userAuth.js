@@ -1,13 +1,13 @@
-const jwt = require("jsonwebtoken");
+const token = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
   try {
-    const { token } = req.headers;
-    if (!token) {
-      return res.json({ Error: "Access Denied", isSuccess: false });
+    const { jwt } = req.headers;
+    if (!jwt) {
+      return res.json({ Error: "Access Failed", isSuccess: false });
     }
-    const auth = token.replace("Bearer ", "");
-    jwt.verify(auth, process.env.SECRET_KEY, async (err, payload) => {
+    const auth = jwt.replace("Bearer ", "");
+    token.verify(auth, process.env.SECRET_KEY, async (err, payload) => {
       if (err) {
         return res.json({ Error: "Authentication Failed", isSuccess: false });
       }

@@ -1,40 +1,59 @@
-import React from 'react'
+import React, { useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Button,
-  Card,
-  ListGroup,
-  ListGroupItem,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
+import { Container, ButtonGroup, Button } from "react-bootstrap";
 import NavBar from "./NavBar";
 
 export default function liveBid() {
-    return (
-      <div>
-        <NavBar />
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-          <Card.Body>
-            <Card.Title>Catering</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroupItem>Cras justo odio</ListGroupItem>
-            <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-            <ListGroupItem>Vestibulum at eros</ListGroupItem>
-          </ListGroup>
-          <Card.Body>
-            <InputGroup className="mb-3">
-              <FormControl placeholder="Bid Amount" />
-            </InputGroup>
-            <Button>Bid</Button>
-          </Card.Body>
-        </Card>
-      </div>
-    );
+  const postData = (cat) => {
+    axios
+      .get("/showAllPost", {
+        headers: {
+          jwt: localStorage.getItem("jwt"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  return (
+    <>
+      <NavBar />
+      <Container fluid>
+        <ButtonGroup size="xs" className="mt-3">
+          <Button
+            onClick={() => {
+              postData(1);
+            }}
+          >
+            Catering
+          </Button>
+          <Button
+            onClick={() => {
+              postData(2);
+            }}
+          >
+            Shipping
+          </Button>
+          <Button
+            onClick={() => {
+              postData(3);
+            }}
+          >
+            Interior Design
+          </Button>
+          <Button
+            onClick={() => {
+              postData(4);
+            }}
+          >
+            Construction
+          </Button>
+        </ButtonGroup>
+      </Container>
+    </>
+  );
 }

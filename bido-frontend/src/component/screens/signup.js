@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 
 import OtpPage from "../screens/otpPage";
 
-const Signup = () => {  
+const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
