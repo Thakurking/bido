@@ -5,18 +5,19 @@ const Post = require("../model/post");
 
 exports.showAllPost = async (req, res) => {
   console.log("hello");
-  console.log(req.params)
+  console.log(req.query);
   if (!req.user) {
     return res.json({ message: "Access Denied", isSuccess: false });
   }
-  const { cat } = req.params;
+  const { cat } = req.query;
   if (!cat) {
     return res.json({ message: "Category Not Selected", isSuccess: false });
   }
   if (cat == 1) {
-    const catering = await Post.find({ category: 1 }).select(
-      "catering postedOn status postedBy"
-    );
+    // const catering = await Post.find({ category: 1 }).select(
+    //   "catering postedOn status postedBy"
+    // );
+    const catering = await Post.find({ category: 1 });
     console.log(catering);
     if (catering) {
       return res.json({

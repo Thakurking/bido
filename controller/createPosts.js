@@ -16,9 +16,9 @@ const construction = require("../component/post/construction");
 
 //#region create bid post from user
 exports.createPost = async (req, res) => {
-  if(!req.user){
-    return res.json({ message: "Access Denied", isSuccess: false });
-  }
+  // if(!req.user){
+  //   return res.json({ message: "Access Denied", isSuccess: false });
+  // }
   const cat = req.body.cat;
   console.log(cat);
   if (!cat) {

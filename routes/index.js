@@ -30,7 +30,7 @@ router.post("/login", loginController.login);
 //#region Bid post create router
 router.post(
   "/createPost",
-  isUser,
+  // isUser,
   photo.upload.array("photo"),
   postController.createPost
 );
