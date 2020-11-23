@@ -24,7 +24,7 @@ let transporter = nodemailer.createTransport({
  * @param {string} amount - this takes amount money for bidding
  */
 
-//#region Take Bids From Bidders
+//#region Take Bids From Bidders in clients posts
 exports.bidsIn = async (req, res) => {
   if (!req.user) {
     return res.json({ message: "Access Denied", isSuccess: false });
@@ -32,7 +32,7 @@ exports.bidsIn = async (req, res) => {
   const { postId, amount } = req.body;
   if (!postId) {
     return res.json({
-      message: "User ID and Post Not Selected",
+      message: "Post Not Selected",
       isSuccess: false,
     });
   }
@@ -72,17 +72,17 @@ exports.bidsIn = async (req, res) => {
   if (!isPost) {
     return res.json({ message: "Post Not Authorized", isSuccess: false });
   }
-  const savePost = await Bids.create({
+  const saveBids = await Bids.create({
     post: postId,
-    bidder: bidder,
+    bidder: req.user,
     amount: amount,
   });
-  console.log(savePost);
-  if (savePost) {
+  console.log(saveBids);
+  if (saveBids) {
     return res.json({
       message: "Your Bid Submitted",
       isSuccess: true,
-      savePost,
+      saveBids,
     });
   }
 };
@@ -94,7 +94,7 @@ exports.bidsIn = async (req, res) => {
  * @param {string} postId - this takes post _id
  */
 
-//#region Accept bid for client
+//#region Accept bids from bidders for clients
 exports.acceptBids = async (req, res) => {
   if (!req.user) {
     return res.json({ message: "Access Denied", isSuccess: false });
@@ -133,7 +133,6 @@ exports.acceptBids = async (req, res) => {
   if (!client) {
     return res.json({ message: "User Not Authorized", isSuccess: false });
   }
-  console.log(isBid.amount);
   const bidNotify = await BidNotify.create({
     categoryName: isPostStatus.category,
     clientName: client.name,

@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Container, Card, Button, Form } from "react-bootstrap";
 
 const Signup = () => {
   const history = useHistory();
@@ -35,7 +28,7 @@ const Signup = () => {
         password,
       })
       .then((res) => {
-        if(res.data.isSuccess){
+        if (res.data.isSuccess) {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("User", JSON.stringify(res.data.User));
           toast.fire({
@@ -43,7 +36,7 @@ const Signup = () => {
             title: res.data.message,
           });
           history.push("/home");
-        }else{
+        } else {
           toast.fire({
             icon: "warning",
             title: res.data.message,
@@ -56,82 +49,57 @@ const Signup = () => {
   };
 
   return (
-    <React.Fragment>
-      <CssBaseline />
+    <>
       <Container>
-        <Card>
-          <CardContent>
-            <Grid container justify="center">
-              <Typography
-                variant="h3"
-                style={{
-                  fontFamily: "monospace",
-                  marginTop: 25,
-                  color: "blueviolet",
-                }}
-              >
-                Login
-              </Typography>
-              <Grid>
-                <form
-                  autoComplete="on"
-                  style={{ marginTop: 15, marginLeft: 75 }}
-                >
-                  <TextField
-                    id="phone"
-                    label="Phone"
+        <Card className="text-center">
+          <Card.Header style={{ backgroundColor: "#343a40" }}>
+            <h2 style={{ color: "wheat" }}>Login</h2>
+          </Card.Header>
+          <Card.Body>
+            <Card.Title>Phone Number</Card.Title>
+            <Card.Text>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter Phone"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    style={{
-                      width: "25ch",
-                      height: "7ch",
-                    }}
                   />
-                  <TextField
-                    id="password"
-                    label="Password"
+                </Form.Group>
+              </Form>
+            </Card.Text>
+            <Card.Title>Password</Card.Title>
+            <Card.Text>
+              <Form>
+                <Form.Group>
+                  <Form.Control
                     type="password"
+                    placeholder="Enter Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    style={{
-                      width: "25ch",
-                      height: "7ch",
-                    }}
                   />
-                </form>
-              </Grid>
-              <Grid justify="center">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="large"
-                  onClick={() => postData()}
-                  style={{
-                    fontSize: 15,
-                    marginTop: 7,
-                  }}
-                >
-                  Login
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container justify="center">
-              <h3>
-                New user.
-                <Link
-                  to="/signup"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
-                  Signup
-                </Link>
-              </h3>
-            </Grid>
-          </CardContent>
+                </Form.Group>
+              </Form>
+            </Card.Text>
+            <Button
+              variant="primary"
+              onClick={() => {
+                postData();
+              }}
+            >
+              Login
+            </Button>
+          </Card.Body>
+          <Card.Footer style={{ backgroundColor: "#343a40", color: "wheat" }}>
+            New User.
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              Signup
+            </Link>
+          </Card.Footer>
         </Card>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 

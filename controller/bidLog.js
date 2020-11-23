@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const CronJob = require("cron").CronJob;
 
 //Database table
 const User = require("../model/user");
@@ -13,17 +12,11 @@ const Post = require("../model/post");
 
 //#region Controller for bids accepted from clients
 exports.acceptedBids = async (req, res) => {
-  //userId will be removed by req.user after setting up middleware
-  const { userId } = req.body;
-  if (!userId) {
+  if (!req.user) {
     return res.json({ message: "Not Authorized", isSuccess: false });
   }
-  const isUser = await User.findOne({ _id: userId });
-  if (!isUser) {
-    return res.json({ message: "Please Signup First", isSuccess: false });
-  }
-  const allBids = await Bids.find({ bidder: userId, status: "Y" });
-  const allPost = await Post.findOne({ status: "Y", bidder: userId });
+  const allBids = await Bids.find({ bidder: req.user, status: "Y" });
+  const allPost = await Post.findOne({ status: "Y", bidder: req.user });
   console.log(allPost);
   console.log(allBids && allPost);
   if (allBids) {
@@ -47,16 +40,14 @@ exports.acceptedBids = async (req, res) => {
 
 //#region Controller for bids that have not accepted by any client
 exports.ongoingBids = async (req, res) => {
-  //userId will be removed by req.user after setting up middleware
-  const { userId } = req.body;
-  if (!userId) {
+  if (!req.user) {
     return res.json({ message: "Not Authorized", isSuccess: false });
   }
-  const isUser = await User.findOne({ _id: userId });
+  const isUser = await User.findOne({ _id: req.user });
   if (!isUser) {
     return res.json({ message: "Please Signup First", isSuccess: false });
   }
-  const allBids = await Bids.find({ bidder: userId, status: "N" });
+  const allBids = await Bids.find({ bidder: req.user, status: "N" });
   if (allBids) {
     return res.json({
       message: "Showing All Ongoing Bids",
@@ -69,14 +60,3 @@ exports.ongoingBids = async (req, res) => {
   }
 };
 //#endregion
-
-// var job = new CronJob(
-//   "5 * * * * *",
-//   function () {
-//     console.log("You will see this message every second");
-//   },
-//   null,
-//   true,
-//   "Asia/Kolkata"
-// );
-// job.start();
