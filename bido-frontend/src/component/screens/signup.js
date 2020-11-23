@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import { Container, Card, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -72,116 +65,97 @@ const Signup = () => {
       });
   };
   return (
-    <React.Fragment>
-      <CssBaseline />
+    <>
       <Container>
-        <Card>
-          <CardContent>
-            <Grid container justify="center">
-              <Typography
-                variant="h3"
-                style={{
-                  fontFamily: "monospace",
-                  marginTop: 25,
-                  color: "blueviolet",
-                }}
-              >
-                SignUp
-              </Typography>
-              <Grid>
-                <form
-                  autoComplete="on"
-                  style={{ marginTop: 15, marginLeft: 75 }}
-                >
-                  <TextField
-                    id="name"
-                    label="Full Name"
+        <Card className="text-center">
+          <Card.Header style={{ backgroundColor: "#343a40" }}>
+            <h2 style={{ color: "wheat" }}>Signup</h2>
+          </Card.Header>
+          <Card.Body>
+            <Card.Title>Full Name</Card.Title>
+            <Card.Text>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Full name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    style={{
-                      width: "25ch",
-                      height: "7ch",
-                    }}
                   />
-                  <TextField
-                    id="email"
-                    label="Email"
+                </Form.Group>
+              </Form>
+            </Card.Text>
+            <Card.Title>Email</Card.Title>
+            <Card.Text>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    style={{
-                      width: "25ch",
-                      height: "7ch",
-                    }}
                   />
-                  <TextField
-                    id="phone"
-                    label="Phone"
+                </Form.Group>
+              </Form>
+            </Card.Text>
+            <Card.Title>Phone Number</Card.Title>
+            <Card.Text>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter Phone"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    style={{
-                      width: "25ch",
-                      height: "7ch",
-                    }}
                   />
-                  <TextField
-                    id="password"
-                    label="Password"
+                </Form.Group>
+              </Form>
+            </Card.Text>
+            <Card.Title>Password</Card.Title>
+            <Card.Text>
+              <Form>
+                <Form.Group>
+                  <Form.Control
                     type="password"
+                    placeholder="Enter Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    style={{
-                      width: "25ch",
-                      height: "7ch",
-                    }}
                   />
-                  <TextField
-                    id="cpassword"
-                    label="Confirm Password"
+                </Form.Group>
+              </Form>
+            </Card.Text>
+            <Card.Title>Confirm Password</Card.Title>
+            <Card.Text>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    type="password"
+                    placeholder="Confirm Password"
                     value={cpassword}
                     onChange={(e) => setPass(e.target.value)}
-                    type="password"
-                    style={{
-                      width: "25ch",
-                      height: "7ch",
-                    }}
                   />
-                </form>
-              </Grid>
-              <Grid justify="center">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="large"
-                  onClick={() => {
-                    postData();
-                  }}
-                  style={{
-                    fontSize: 15,
-                    marginTop: 7,
-                  }}
-                >
-                  Signup
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container justify="center">
-              <h3>
-                Already registered.
-                <Link
-                  to="/login"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
-                  Login
-                </Link>
-              </h3>
-            </Grid>
-          </CardContent>
+                </Form.Group>
+              </Form>
+            </Card.Text>
+            <Button
+              variant="primary"
+              onClick={() => {
+                postData();
+              }}
+            >
+              Login
+            </Button>
+          </Card.Body>
+          <Card.Footer style={{ backgroundColor: "#343a40", color: "wheat" }}>
+            Already member.
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              Login
+            </Link>
+          </Card.Footer>
         </Card>
-        {active === true && <OtpPage />}
+        {active ?  <OtpPage /> : null}
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 
