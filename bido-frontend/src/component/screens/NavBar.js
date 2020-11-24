@@ -50,16 +50,58 @@ export default function NavBar() {
                 </Link>
               </Nav.Link>
               <NavDropdown title="Bids" id="collasible-nav-dropdown">
-                <NavDropdown.Item>Accepted Bids</NavDropdown.Item>
-                <NavDropdown.Item>Ongoing Bids</NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link
+                    to="/acceptedBids"
+                    style={{ color: "wheat", textDecoration: "none" }}
+                  >
+                    Accepted Bids
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link
+                    to="/ongoingBids"
+                    style={{ color: "wheat", textDecoration: "none" }}
+                  >
+                    Ongoing Bids
+                  </Link>
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item>Today's Bids</NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link
+                    to="/currentBids"
+                    style={{ color: "wheat", textDecoration: "none" }}
+                  >
+                    Today's Bids
+                  </Link>
+                </NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Posts" id="collasible-nav-dropdown">
-                <NavDropdown.Item>Accepted Post</NavDropdown.Item>
-                <NavDropdown.Item>Ongoing Post</NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link
+                    to="/acceptedPost"
+                    style={{ color: "wheat", textDecoration: "none" }}
+                  >
+                    Accepted Post
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link
+                    to="/ongoingPost"
+                    style={{ color: "wheat", textDecoration: "none" }}
+                  >
+                    Ongoing Post
+                  </Link>
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item>Today's Post</NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link
+                    to="/currentPost"
+                    style={{ color: "wheat", textDecoration: "none" }}
+                  >
+                    Today's Post
+                  </Link>
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Nav>
