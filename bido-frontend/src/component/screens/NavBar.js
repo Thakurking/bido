@@ -1,6 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, Container, NavDropdown, ButtonGroup, Button } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  NavDropdown,
+  ButtonGroup,
+  Button,
+} from "react-bootstrap";
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 export default function NavBar() {
