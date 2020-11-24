@@ -35,7 +35,7 @@ export default function NavBar() {
               </Nav.Link>
               <Nav.Link>
                 <Link
-                  to="/signup"
+                  to="/livBid"
                   style={{ color: "wheat", textDecoration: "none" }}
                 >
                   Live Bids
@@ -43,7 +43,7 @@ export default function NavBar() {
               </Nav.Link>
               <Nav.Link>
                 <Link
-                  to="/signup"
+                  to="/about"
                   style={{ color: "wheat", textDecoration: "none" }}
                 >
                   About
