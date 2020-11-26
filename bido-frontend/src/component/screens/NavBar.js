@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -11,6 +11,11 @@ import {
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 export default function NavBar() {
+  const history = useHistory();
+  const logout = () => {
+    localStorage.removeItem("jwt");
+    history.push("/login");
+  }
   return (
     <div>
       <Container>
@@ -117,6 +122,9 @@ export default function NavBar() {
                     backgroundColor: "wheat",
                     border: "none",
                     color: "black",
+                  }}
+                  onClick={() => {
+                    logout();
                   }}
                 >
                   Logout

@@ -63,7 +63,7 @@ exports.showAllPost = async (req, res) => {
       });
     } else {
       return res.json({
-        message: "Somwthing Went Wrong Please Try Again",
+        message: "Something Went Wrong Please Try Again",
         isSuccess: false,
       });
     }

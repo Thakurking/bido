@@ -75,7 +75,7 @@ const Signup = () => {
                   marginTop: 7,
                 }}
               >
-                Signup
+                Verify
               </Button>
             </Grid>
           </CardContent>

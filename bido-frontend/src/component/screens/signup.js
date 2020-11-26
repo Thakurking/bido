@@ -47,7 +47,7 @@ const Signup = () => {
         }
         if (res.data.isOTP) {
           setActive(true)
-          localStorage.getItem("userId", res.data.user);
+          localStorage.setItem("userId", res.data.user);
           toast.fire({
             icon: "success",
             title: res.data.message,
@@ -148,7 +148,7 @@ const Signup = () => {
           </Card.Body>
           <Card.Footer style={{ backgroundColor: "#343a40", color: "wheat" }}>
             Already member.
-            <Link to="/signup" style={{ textDecoration: "none" }}>
+            <Link to="/login" style={{ textDecoration: "none" }}>
               Login
             </Link>
           </Card.Footer>
