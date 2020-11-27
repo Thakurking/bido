@@ -46,7 +46,7 @@ exports.acceptedPost = async (req, res) => {
   console.log("new data cached", saveResult);
   if (allPost) {
     return res.json({
-      message: "Showing Data Of Posts",
+      message: "Showing All Accepted Posts",
       isSuccess: true,
       allPost,
       isUser,
@@ -83,7 +83,7 @@ exports.ongoingPost = async (req, res) => {
   console.log("using cached data", saveResult);
   if (allPost) {
     return res.json({
-      message: "Showing All Posts",
+      message: "Showing All Ongoing Posts",
       isSuccess: true,
       allPost,
     });
