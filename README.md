@@ -14,11 +14,9 @@ Bidder can also give post for different biders for own services
 # Services..
 This service is related to the bids postes by the user which is Catering, Shipping, Interior Design, Construction, and bidders will bid on these services.
 ## Catering
-This service is related to catering fields user can share catering details and bidder who are looking for catering work they can bid and if there bids
-got accepted they can contact the user who posted the bids but the user have to pust some details in order to post a Catering post 
-such as total number of people and dish items and extra
-notes for bidders and if they waiters or not or if they want the caterign as buffet or not and what will be the serving time and date and location
-of the user where he/she wants the catering.
+This service is related to catering fields user can share catering details and bidder who are looking for catering contract they can bid and if there bids
+got accepted by the client they can contact the user who posted the bids but the user have to add some details in order to post a Catering post 
+such as total number of people and dish items and extra notes for bidders and if they want waiters or not or if they want the caterign as buffet or not and what will be the serving time and date and location of the client where he/she wants the catering.
 ## Shipping
 This service is related to shipping if any user wants a shipping service if they want to make product shipping or movers and packers service so
 then they can submit a shipping related post in which they enter there location of pick up and destination and weight and size and extra notes for bidders and
