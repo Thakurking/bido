@@ -46,7 +46,7 @@ router.get("/acceptedPost", isUser, postHistoryController.acceptedPost);
 router.get("/ongoingPost", isUser, postHistoryController.ongoingPost);
 //#endregion
 
-//#region Bids Accepted and Bids not Accepted
+//#region Bids Accepted and Bids not Accepted or Ongoing
 router.get("/acceptedBids", isUser, bidHistoryController.acceptedBids);
 router.get("/ongoingBids", isUser, bidHistoryController.ongoingBids);
 //#endregion
