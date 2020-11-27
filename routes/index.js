@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const redis = require("redis");
-const client = redis.createClient();
 
 const signupController = require("../controller/signup");
 const loginController = require("../controller/login");
