@@ -37,7 +37,6 @@ exports.showAllPost = async (req, res) => {
     const catering = await Post.find({ category: 1 }).select(
       "catering postedOn status postedBy"
     );
-    // const catering = await Post.find({});
     const saveResult = await SET_ASYNC(cat, JSON.stringify(catering), "EX", 60);
     console.log("new data cached", saveResult);
     // client.setex("postData", 60, JSON.stringify(catering));

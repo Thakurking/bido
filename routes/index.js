@@ -58,21 +58,6 @@ router.get("/bidNotify", isUser, bidNotify.bidNotify);
 //#endregion
 
 //#region Show all post
-// const redis_post = async (req, res, next) =>{
-//   client.get('postData', (err, data) =>{
-//     if(err){
-//       throw err
-//     }else if(data){
-//       return res.json({
-//         message: "using cache data",
-//         catering: JSON.parse(data),
-//         isSuccess: true,
-//       });
-//     }else{
-//       next();
-//     }
-//   })
-// }
 router.post("/showAllPost", showAllPost.showAllPost);
 //#endregion
 
