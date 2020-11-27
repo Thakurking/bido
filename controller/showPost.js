@@ -1,29 +1,52 @@
+//Mongoose
 const mongoose = require("mongoose");
+//Redis
+const redis = require("redis");
+//Promises
+const { promisify } = require("util");
 
 //Database Table
 const Post = require("../model/post");
 
+//Redai Client Setup
+const client = redis.createClient();
+const GET_ASYNC = promisify(client.get).bind(client);
+const SET_ASYNC = promisify(client.set).bind(client);
+
+
+
 exports.showAllPost = async (req, res) => {
   console.log("hello");
   console.log(req.query);
-  if (!req.user) {
-    return res.json({ message: "Access Denied", isSuccess: false });
-  }
+  // if (!req.user) {
+  //   return res.json({ message: "Access Denied", isSuccess: false });
+  // }
   const { cat } = req.query;
   if (!cat) {
     return res.json({ message: "Category Not Selected", isSuccess: false });
   }
+  const reply = await GET_ASYNC(cat)
+  if(reply){
+    return res.json({
+      message: "using cached data",
+      isSuccess: true,
+      data: JSON.parse(reply),
+    });
+  }
   if (cat == 1) {
-    // const catering = await Post.find({ category: 1 }).select(
-    //   "catering postedOn status postedBy"
-    // );
-    const catering = await Post.find({ category: 1 });
-    console.log(catering);
+    const catering = await Post.find({ category: 1 }).select(
+      "catering postedOn status postedBy"
+    );
+    // const catering = await Post.find({});
+    const saveResult = await SET_ASYNC(cat, JSON.stringify(catering), "EX", 60);
+    console.log("new data cached", saveResult);
+    // client.setex("postData", 60, JSON.stringify(catering));
+    console.log("new data cached", saveResult);
     if (catering) {
       return res.json({
         message: "Showing Post For Catering",
         isSuccess: true,
-        catering: catering,
+        data: catering,
       });
     } else {
       return res.json({
@@ -33,15 +56,16 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 2) {
-    const shipping = await Post.find({ category: 2 }).select(
+    const shipping = await Post.find({ }).select(
       "shipping postedOn status postedBy"
     );
-    console.log(shipping);
+    const saveResult = await SET_ASYNC(cat, JSON.stringify(shipping), "EX", 60);
+    console.log("new data cached", saveResult);
     if (shipping) {
       return res.json({
         message: "Showing Post For Shipping",
         isSuccess: true,
-        shipping: shipping,
+        data: shipping,
       });
     } else {
       return res.json({
@@ -51,15 +75,21 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 3) {
-    const interiorDesign = await Post.find({ category: 3 }).select(
+    const interiorDesign = await Post.find({  }).select(
       "interiorDesign postedOn status postedBy"
     );
-    console.log(interiorDesign);
+    const saveResult = await SET_ASYNC(
+      cat,
+      JSON.stringify(interiorDesign),
+      "EX",
+      60
+    );
+    console.log("new data cached", saveResult);
     if (interiorDesign) {
       return res.json({
         message: "Showing Post For Interior Design",
         isSuccess: true,
-        interiorDesign: interiorDesign,
+        data: interiorDesign,
       });
     } else {
       return res.json({
@@ -69,15 +99,21 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 4) {
-    const construction = await Post.find({ category: 4 }).select(
+    const construction = await Post.find({  }).select(
       "construction postedOn status postedBy"
     );
-    console.log(construction);
+    const saveResult = await SET_ASYNC(
+      cat,
+      JSON.stringify(construction),
+      "EX",
+      60
+    );
+    console.log("new data cached", saveResult);
     if (construction) {
       return res.json({
         message: "Showing Post For Construction",
         isSuccess: true,
-        construction: construction,
+        data: construction,
       });
     } else {
       return res.json({
