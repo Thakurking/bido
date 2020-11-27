@@ -56,7 +56,7 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 2) {
-    const shipping = await Post.find({ }).select(
+    const shipping = await Post.find({ category: 2 }).select(
       "shipping postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(cat, JSON.stringify(shipping), "EX", 60);
@@ -75,7 +75,7 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 3) {
-    const interiorDesign = await Post.find({  }).select(
+    const interiorDesign = await Post.find({ category: 3 }).select(
       "interiorDesign postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(
@@ -99,7 +99,7 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 4) {
-    const construction = await Post.find({  }).select(
+    const construction = await Post.find({ category: 4 }).select(
       "construction postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(
