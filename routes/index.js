@@ -58,7 +58,7 @@ router.get("/bidNotify", isUser, bidNotify.bidNotify);
 //#endregion
 
 //#region Show all post
-router.post("/showAllPost", showAllPost.showAllPost);
+router.post("/showAllPost", isUser, showAllPost.showAllPost);
 //#endregion
 
 //#region Update Address
