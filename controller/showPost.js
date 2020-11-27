@@ -16,17 +16,15 @@ const SET_ASYNC = promisify(client.set).bind(client);
 
 
 exports.showAllPost = async (req, res) => {
-  console.log("hello");
-  console.log(req.query);
-  // if (!req.user) {
-  //   return res.json({ message: "Access Denied", isSuccess: false });
-  // }
+  if (!req.user) {
+    return res.json({ message: "Access Denied", isSuccess: false });
+  }
   const { cat } = req.query;
   if (!cat) {
     return res.json({ message: "Category Not Selected", isSuccess: false });
   }
-  const reply = await GET_ASYNC(cat)
-  if(reply){
+  const reply = await GET_ASYNC(cat);
+  if (reply) {
     return res.json({
       message: "using cached data",
       isSuccess: true,
@@ -38,8 +36,6 @@ exports.showAllPost = async (req, res) => {
       "catering postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(cat, JSON.stringify(catering), "EX", 60);
-    console.log("new data cached", saveResult);
-    // client.setex("postData", 60, JSON.stringify(catering));
     console.log("new data cached", saveResult);
     if (catering) {
       return res.json({
