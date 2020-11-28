@@ -14,9 +14,9 @@ const GET_ASYNC = promisify(client.get).bind(client);
 const SET_ASYNC = promisify(client.set).bind(client);
 
 exports.showAllPost = async (req, res) => {
-  // if (!req.user) {
-  //   return res.json({ message: "Access Denied", isSuccess: false });
-  // }
+  if (!req.user) {
+    return res.json({ message: "Access Denied", isSuccess: false });
+  }
   const { cat } = req.query;
   if (!cat) {
     return res.json({ message: "Category Not Selected", isSuccess: false });
@@ -33,7 +33,7 @@ exports.showAllPost = async (req, res) => {
     const catering = await Post.find({ category: cat }).select(
       "catering postedOn status postedBy"
     );
-    const saveResult = await SET_ASYNC(cat, JSON.stringify(catering), "EX", 60);
+    const saveResult = await SET_ASYNC(cat, JSON.stringify(catering), "EX", 3);
     console.log("new data cached", saveResult);
     if (catering) {
       return res.json({
@@ -52,7 +52,7 @@ exports.showAllPost = async (req, res) => {
     const shipping = await Post.find({ category: cat }).select(
       "shipping postedOn status postedBy"
     );
-    const saveResult = await SET_ASYNC(cat, JSON.stringify(shipping), "EX", 60);
+    const saveResult = await SET_ASYNC(cat, JSON.stringify(shipping), "EX", 3);
     console.log("new data cached", saveResult);
     if (shipping) {
       return res.json({
@@ -75,7 +75,7 @@ exports.showAllPost = async (req, res) => {
       cat,
       JSON.stringify(interiorDesign),
       "EX",
-      60
+      3
     );
     console.log("new data cached", saveResult);
     if (interiorDesign) {
@@ -99,7 +99,7 @@ exports.showAllPost = async (req, res) => {
       cat,
       JSON.stringify(construction),
       "EX",
-      60
+      3
     );
     console.log("new data cached", saveResult);
     if (construction) {
