@@ -19,10 +19,13 @@ app.use(bodyParser.json());
 app.use(cookieParser())
 
 app.use(express.static("public"));
+
 app.use("/", index);
+
 app.use(async (req, res, next) => {
-  next(createError.NotFound());
+  next(createError.NotFound("PAGE NOT FOUND"));
 });
+
 app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.send({
