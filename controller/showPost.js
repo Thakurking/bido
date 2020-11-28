@@ -13,12 +13,10 @@ const client = redis.createClient();
 const GET_ASYNC = promisify(client.get).bind(client);
 const SET_ASYNC = promisify(client.set).bind(client);
 
-
-
 exports.showAllPost = async (req, res) => {
-  if (!req.user) {
-    return res.json({ message: "Access Denied", isSuccess: false });
-  }
+  // if (!req.user) {
+  //   return res.json({ message: "Access Denied", isSuccess: false });
+  // }
   const { cat } = req.query;
   if (!cat) {
     return res.json({ message: "Category Not Selected", isSuccess: false });
@@ -32,7 +30,7 @@ exports.showAllPost = async (req, res) => {
     });
   }
   if (cat == 1) {
-    const catering = await Post.find({ category: 1 }).select(
+    const catering = await Post.find({ category: cat }).select(
       "catering postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(cat, JSON.stringify(catering), "EX", 60);
@@ -51,7 +49,7 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 2) {
-    const shipping = await Post.find({ category: 2 }).select(
+    const shipping = await Post.find({ category: cat }).select(
       "shipping postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(cat, JSON.stringify(shipping), "EX", 60);
@@ -70,7 +68,7 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 3) {
-    const interiorDesign = await Post.find({ category: 3 }).select(
+    const interiorDesign = await Post.find({ category: cat }).select(
       "interiorDesign postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(
@@ -94,7 +92,7 @@ exports.showAllPost = async (req, res) => {
     }
   }
   if (cat == 4) {
-    const construction = await Post.find({ category: 4 }).select(
+    const construction = await Post.find({ category: cat }).select(
       "construction postedOn status postedBy"
     );
     const saveResult = await SET_ASYNC(

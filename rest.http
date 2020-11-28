@@ -1,1 +1,10 @@
 POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "phone": "6294923461",
+    "password": "Blkhrt@123"
+}
+
+###
+POST http://localhost:5000/showAllPost?cat=1
