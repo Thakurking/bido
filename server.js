@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 const index = require("./routes/index");
 const bodyParser = require("body-parser");
-const cookieParser = require('cookie-parser')
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const createError = require("http-errors");
@@ -16,9 +16,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 //Parser Cookie
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use(express.static("public"));
+
+app.use(morgan("dev"));
 
 app.use("/", index);
 
@@ -27,14 +29,14 @@ app.use(async (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(err.status || 500)
+  res.status(err.status || 500);
   res.send({
     error: {
       status: err.status || 500,
       message: err.message,
     },
   });
-})
+});
 
 //===========mongoDB Connection==============//
 const connectDB = async () => {
