@@ -5,7 +5,7 @@ const protectedRoutes = ({ component: Cmp, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      localStorage.getItem("jwt") ? (
+      localStorage.getItem("user_id") ? (
         <Cmp {...props} />
       ) : (
         <Redirect to="/login" />

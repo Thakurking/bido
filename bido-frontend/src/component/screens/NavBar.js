@@ -13,7 +13,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 export default function NavBar() {
   const history = useHistory();
   const logout = () => {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("user_id");
     history.push("/login");
   }
   return (
@@ -32,6 +32,14 @@ export default function NavBar() {
             <Nav className="mr-auto">
               <Nav.Link>
                 <Link
+                  to="/home"
+                  style={{ color: "wheat", textDecoration: "none" }}
+                >
+                  Home
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link
                   to="/Profile"
                   style={{ color: "wheat", textDecoration: "none" }}
                 >
@@ -40,7 +48,7 @@ export default function NavBar() {
               </Nav.Link>
               <Nav.Link>
                 <Link
-                  to="/livBid"
+                  to="/liveBid"
                   style={{ color: "wheat", textDecoration: "none" }}
                 >
                   Live Bids
@@ -58,7 +66,7 @@ export default function NavBar() {
                 <NavDropdown.Item>
                   <Link
                     to="/acceptedBids"
-                    style={{ color: "wheat", textDecoration: "none" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     Accepted Bids
                   </Link>
@@ -66,7 +74,7 @@ export default function NavBar() {
                 <NavDropdown.Item>
                   <Link
                     to="/ongoingBids"
-                    style={{ color: "wheat", textDecoration: "none" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     Ongoing Bids
                   </Link>
@@ -75,7 +83,7 @@ export default function NavBar() {
                 <NavDropdown.Item>
                   <Link
                     to="/currentBids"
-                    style={{ color: "wheat", textDecoration: "none" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     Today's Bids
                   </Link>
@@ -85,7 +93,7 @@ export default function NavBar() {
                 <NavDropdown.Item>
                   <Link
                     to="/acceptedPost"
-                    style={{ color: "wheat", textDecoration: "none" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     Accepted Post
                   </Link>
@@ -93,7 +101,7 @@ export default function NavBar() {
                 <NavDropdown.Item>
                   <Link
                     to="/ongoingPost"
-                    style={{ color: "wheat", textDecoration: "none" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     Ongoing Post
                   </Link>
@@ -102,7 +110,7 @@ export default function NavBar() {
                 <NavDropdown.Item>
                   <Link
                     to="/currentPost"
-                    style={{ color: "wheat", textDecoration: "none" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     Today's Post
                   </Link>

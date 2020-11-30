@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const createError = require("http-errors");
+require("./helper/redis_helper");
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

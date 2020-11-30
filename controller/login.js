@@ -8,7 +8,9 @@ const redis = require("redis");
 const User = require("../model/user");
 
 //Redis Setup
-const client = redis.createClient();
+// const client = redis.createClient();
+
+const client = require("../helper/redis_helper");
 
 /**
  *@module login
@@ -50,18 +52,22 @@ exports.login = async (req, res) => {
       payload.user = isUser._id;
       if (isUser.role === "client") payload.client = true;
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
-        expiresIn: "1h",
+        expiresIn: "60s",
       });
-      const userId = isUser._id;
-      client.SET(userId, JSON.stringify(token), "EX", 3600);
-      const User = isUser;
-      User.password = "";
-      return res.json({
-        message: "Login Successful",
-        isSuccess: true,
-        User,
-        token,
-        userId: isUser._id,
+      const user_id = isUser._id;
+      client.set(`${user_id}`, `${token}`, "EX", 60, (err, reply) => {
+        if (err) {
+          return res.json({ message: "Could Not Get Token", isSuccess: false });
+        }
+        const User = isUser;
+        User.password = "";
+        return res.json({
+          message: "Login Successful",
+          isSuccess: true,
+          User,
+          token,
+          user_id: isUser._id,
+        });
       });
     });
   } else {

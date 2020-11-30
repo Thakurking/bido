@@ -15,7 +15,7 @@ const SET_ASYNC = promisify(client.set).bind(client);
 
 exports.showAllPost = async (req, res) => {
   if (!req.user) {
-    return res.json({ message: "Access Denied", isSuccess: false });
+    return res.json({ message: "Access failed", isSuccess: false });
   }
   const { cat } = req.query;
   if (!cat) {
