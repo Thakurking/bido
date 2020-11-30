@@ -29,7 +29,6 @@ const Signup = () => {
       })
       .then((res) => {
         if (res.data.isSuccess) {
-          localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("User", JSON.stringify(res.data.User));
           localStorage.setItem("user_id", JSON.stringify(res.data.user_id));
           toast.fire({
