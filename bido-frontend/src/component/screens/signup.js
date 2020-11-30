@@ -38,7 +38,7 @@ const Signup = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.isSuccess) {
-          localStorage.setItem("userId", res.data.user);
+          localStorage.setItem("userId", res.data.userId);
           toast.fire({
             icon: "success",
             title: res.data.message,
@@ -47,7 +47,7 @@ const Signup = () => {
         }
         if (res.data.isOTP) {
           setActive(true)
-          localStorage.setItem("userId", res.data.user);
+          localStorage.setItem("userId", res.data.userId);
           toast.fire({
             icon: "success",
             title: res.data.message,

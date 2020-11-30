@@ -2,20 +2,18 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const redis = require("redis");
 
 //Database tables
 const User = require("../model/user");
 
-// /**
-//  *@module login
-//  * @param {string} phone - this takes user phone number
-//  * @param {string} password - this takes password from user
-//  */
+//Redis Setup
+const client = redis.createClient();
 
 /**
- *
- * @param {string} req req have phone password
- * @param {Object} res res have response for output
+ *@module login
+ * @param {string} phone - this takes user phone number
+ * @param {string} password - this takes password from user
  */
 
 //#region Login router
@@ -54,6 +52,8 @@ exports.login = async (req, res) => {
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
         expiresIn: "1h",
       });
+      const userId = isUser._id;
+      client.SET(userId, JSON.stringify(token), "EX", 3600);
       const User = isUser;
       User.password = "";
       return res.json({
@@ -61,6 +61,7 @@ exports.login = async (req, res) => {
         isSuccess: true,
         User,
         token,
+        userId: isUser._id,
       });
     });
   } else {
