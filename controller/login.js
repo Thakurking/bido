@@ -52,10 +52,10 @@ exports.login = async (req, res) => {
       payload.user = isUser._id;
       if (isUser.role === "client") payload.client = true;
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
-        expiresIn: "60s",
+        expiresIn: "1h",
       });
       const user_id = isUser._id;
-      client.set(`${user_id}`, `${token}`, "EX", 60, (err, reply) => {
+      client.set(`${user_id}`, `${token}`, "EX", 3600, (err, reply) => {
         if (err) {
           return res.json({ message: "Could Not Get Token", isSuccess: false });
         }
