@@ -17,7 +17,12 @@ exports.deleteRedisAuth = async (req, res) => {
             console.log(val);
             return res.json({ message: "Logout Successful", isSuccess: true });
           });
-        } 
+        } else{
+            return res.json({
+              message: "Something went wrong",
+              isSuccess: false,
+            });
+        }
     } catch (error) {
         console.log(error)
         return res.json({ message: "Internal Server Error", isSuccess: false });
