@@ -17,7 +17,7 @@ export default function NavBar() {
 
   const toast = Swal.mixin({
     toast: true,
-    position: "top",
+    position: "center",
     width: "100vw",
     showConfirmButton: false,
     timer: 3000,
