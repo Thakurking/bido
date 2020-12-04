@@ -8,14 +8,46 @@ import {
   ButtonGroup,
   Button,
 } from "react-bootstrap";
-import GitHubIcon from '@material-ui/icons/GitHub';
+import GitHubIcon from "@material-ui/icons/GitHub";
+import Swal from "sweetalert2";
+import { axios } from "axios";
 
 export default function NavBar() {
   const history = useHistory();
+
+  const toast = Swal.mixin({
+    toast: true,
+    position: "top",
+    width: "100vw",
+    showConfirmButton: false,
+    timer: 3000,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   const logout = () => {
-    localStorage.removeItem("user_id");
-    history.push("/login");
-  }
+    axios
+      .post("/deleteRedisAuth", {
+        user_id: localStorage.getItem("user_id"),
+      })
+      .then((res) => {
+        if (res.data.isSuccess) {
+          localStorage.removeItem("user_id");
+          history.push("/login");
+          toast.fire({
+            icon: "success",
+            title: res.data.message,
+          });
+        } else {
+          toast.fire({
+            icon: "error",
+            title: res.data.message,
+          });
+        }
+      });
+  };
   return (
     <div>
       <Container>

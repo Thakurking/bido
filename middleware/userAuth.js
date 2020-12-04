@@ -14,7 +14,6 @@ module.exports = async (req, res, next) => {
     //   return res.json({ Error: "Access Failed", isSuccess: false });
     // }
     const { user_id } = req.headers;
-    console.log(user_id);
     if (!user_id) {
       return res.json({ message: "Access Denied", isSuccess: false });
     }

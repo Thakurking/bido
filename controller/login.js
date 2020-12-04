@@ -8,8 +8,6 @@ const redis = require("redis");
 const User = require("../model/user");
 
 //Redis Setup
-// const client = redis.createClient();
-
 const client = require("../helper/redis_helper");
 
 /**
@@ -55,7 +53,7 @@ exports.login = async (req, res) => {
         expiresIn: "1h",
       });
       const user_id = isUser._id;
-      client.set(`${user_id}`, `${token}`, "EX", 3600, (err, reply) => {
+      client.SET(`${user_id}`, `${token}`, "EX", 3600, (err, reply) => {
         if (err) {
           return res.json({ message: "Could Not Get Token", isSuccess: false });
         }
