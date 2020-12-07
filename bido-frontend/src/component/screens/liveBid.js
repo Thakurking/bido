@@ -5,23 +5,31 @@ import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 
 export default function liveBid() {
-  // const fetchData = () => {
-  //   axios
-  //     .get("/showAllPost", {
-  //       headers: {
-  //         user_id: localStorage.getItem("user_id"),
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const fetchData = () => {
+    axios
+      .get("/showAllPost", {
+        headers: {
+          "Content-Type": "application/json",
+          user_id: localStorage.getItem("user_id"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
+      <Button
+        onClick={() => {
+          fetchData();
+        }}
+      >
+        Click
+      </Button>
     </>
   );
 }

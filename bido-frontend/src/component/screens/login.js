@@ -31,6 +31,7 @@ const Signup = () => {
         if (res.data.isSuccess) {
           localStorage.setItem("User", JSON.stringify(res.data.User));
           localStorage.setItem("user_id", JSON.stringify(res.data.user_id));
+          localStorage.setItem("jwt", JSON.stringify(res.data.token));
           toast.fire({
             icon: "success",
             title: res.data.message,

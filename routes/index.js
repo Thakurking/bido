@@ -92,7 +92,7 @@ router.get("/todayBids", isUser, todayAcceptedBids.todayBids);
 //#endregion
 
 //#region Delete Redis Authentication for client
-router.delete("/deleteRedisAuth", deleteRedisAuth.deleteRedisAuth);
+router.post("/deleteRedisAuth", deleteRedisAuth.deleteRedisAuth);
 //#endregion
 
 module.exports = router;
