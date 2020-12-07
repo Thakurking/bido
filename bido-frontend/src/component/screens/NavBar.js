@@ -29,7 +29,7 @@ export default function NavBar() {
 
   const logout = () => {
     axios
-      .post("/deleteRedisAuth", {
+      .delete("/deleteRedisAuth", {
         user_id: localStorage.getItem("user_id"),
       })
       .then((res) => {

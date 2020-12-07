@@ -25,6 +25,6 @@ exports.deleteRedisAuth = async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-        return res.json({ message: "Internal Server Error", isSuccess: false });
+        return res.json({ message: "Internal Server Error ❎", isSuccess: false });
     }
 };

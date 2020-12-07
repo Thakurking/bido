@@ -50,17 +50,17 @@ exports.login = async (req, res) => {
       payload.user = isUser._id;
       if (isUser.role === "client") payload.client = true;
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
-        expiresIn: "1h",
+        expiresIn: "40s",
       });
       const user_id = isUser._id;
-      client.SET(`${user_id}`, `${token}`, "EX", 3600, (err, reply) => {
+      client.SET(`${user_id}`, `${token}`, "EX", 40, (err, reply) => {
         if (err) {
           return res.json({ message: "Could Not Get Token", isSuccess: false });
         }
         const User = isUser;
         User.password = "";
         return res.json({
-          message: "Login Successful",
+          message: "Login Successful 🚀",
           isSuccess: true,
           User,
           user_id: isUser._id,
@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
       });
     });
   } else {
-    return res.json({ message: "User Not Found", isSuccess: false });
+    return res.json({ message: "User Not Found 😞", isSuccess: false });
   }
 };
 //#endregion
