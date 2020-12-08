@@ -27,7 +27,6 @@ module.exports = async (req, res, next) => {
     //   }
     // });
     const { user_id } = req.headers;
-    const { jwt } = req.headers;
     if (!user_id) {
       return res.json({ message: "Access Denied", isSuccess: false });
     }
@@ -41,7 +40,7 @@ module.exports = async (req, res, next) => {
       if (data) {
         req.user = user_id;
         req.client = true;
-        next();
+        return next();
       } else {
         return res.json({ message: "Not Authorized", isSuccess: false });
       }
