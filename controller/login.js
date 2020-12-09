@@ -64,6 +64,7 @@ exports.login = async (req, res) => {
           isSuccess: true,
           User,
           user_id: isUser._id,
+          token,
         });
       });
     });

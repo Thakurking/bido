@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Post = require("../model/post");
 
 exports.showAllPost = async (req, res) => {
+  console.log("hello")
   if (!req.user) {
     return res.json({ message: "Access failed", isSuccess: false });
   }

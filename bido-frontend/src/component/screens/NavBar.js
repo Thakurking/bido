@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import Swal from "sweetalert2";
-import { axios } from "axios";
+import axios from "axios"
 
 export default function NavBar() {
   const history = useHistory();
@@ -29,7 +29,7 @@ export default function NavBar() {
 
   const logout = () => {
     axios
-      .delete("/deleteRedisAuth", {
+      .post("/deleteRedisAuth", {
         user_id: localStorage.getItem("user_id"),
       })
       .then((res) => {
@@ -163,9 +163,7 @@ export default function NavBar() {
                     border: "none",
                     color: "black",
                   }}
-                  onClick={() => {
-                    logout();
-                  }}
+                  onClick={() => logout()}
                 >
                   Logout
                 </Button>
