@@ -1,12 +1,40 @@
 import React from "react";
-import { Navbar } from "react-bootstrap";
-import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import { Link } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import GitHubIcon from "@material-ui/icons/GitHub";
 export default function bottomNavBar() {
   return (
     <div>
-      <Navbar fixed="bottom">
-          
-      </Navbar>
+      <Container>
+        <Navbar expand="lg" bg="dark" variant="dark" fixed="bottom">
+          <Nav.Link>
+            <Link
+              to="/Contact"
+              style={{ color: "wheat", textDecoration: "none" }}
+            >
+                Contact
+            </Link>
+          </Nav.Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link>
+                <Link
+                  to="/feedback"
+                  style={{ color: "wheat", textDecoration: "none" }}
+                >
+                  Feedback
+                </Link>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link href="https://github.com/Thakurking/bido">
+                <GitHubIcon />
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </Container>
     </div>
   );
 }

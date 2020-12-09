@@ -88,10 +88,10 @@ export default function NavBar() {
               </Nav.Link>
               <Nav.Link>
                 <Link
-                  to="/about"
+                  to="/addBids"
                   style={{ color: "wheat", textDecoration: "none" }}
                 >
-                  About
+                  Add Bids
                 </Link>
               </Nav.Link>
               <NavDropdown title="Bids" id="collasible-nav-dropdown">
@@ -149,11 +149,11 @@ export default function NavBar() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Nav>
+            {/* <Nav>
               <Nav.Link href="https://github.com/Thakurking/bido">
                 <GitHubIcon />
               </Nav.Link>
-            </Nav>
+            </Nav> */}
             <Nav>
               <ButtonGroup className="ml-2">
                 <Button
