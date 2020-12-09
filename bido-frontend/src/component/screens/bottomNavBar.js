@@ -9,10 +9,18 @@ export default function bottomNavBar() {
         <Navbar expand="lg" bg="dark" variant="dark" fixed="bottom">
           <Nav.Link>
             <Link
-              to="/Contact"
+              to="/contact"
               style={{ color: "wheat", textDecoration: "none" }}
             >
-                Contact
+              Contact
+            </Link>
+          </Nav.Link>
+          <Nav.Link>
+            <Link
+              to="/about"
+              style={{ color: "wheat", textDecoration: "none" }}
+            >
+              About
             </Link>
           </Nav.Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
