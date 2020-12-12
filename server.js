@@ -48,7 +48,7 @@ const connectDB = async () => {
       useFindAndModify: false,
       useUnifiedTopology: true,
     });
-    console.log(`mongoDB Disconnected on: ${conn.connection.host} 
+    console.log(`mongoDB Disconnected on: ${conn.connection.host}
 
     ||||||||||||||||||||||||||||||||||||||
     |      BHARAT SOFTWARE SYSTEMS V0.0  |

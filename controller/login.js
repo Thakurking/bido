@@ -53,20 +53,29 @@ exports.login = async (req, res) => {
         expiresIn: "40s",
       });
       const user_id = isUser._id;
-      client.SET(`${user_id}`, `${token}`, "EX", 40, (err, reply) => {
-        if (err) {
-          return res.json({ message: "Could Not Get Token", isSuccess: false });
+      client.SET(
+        JSON.stringify(user_id),
+        JSON.stringify(token),
+        "EX",
+        40,
+        (err, reply) => {
+          if (err) {
+            return res.json({
+              message: "Could Not Get Token",
+              isSuccess: false,
+            });
+          }
+          const User = isUser;
+          User.password = "";
+          return res.json({
+            message: "Login Successful 🚀",
+            isSuccess: true,
+            User,
+            user_id: isUser._id,
+            token,
+          });
         }
-        const User = isUser;
-        User.password = "";
-        return res.json({
-          message: "Login Successful 🚀",
-          isSuccess: true,
-          User,
-          user_id: isUser._id,
-          token,
-        });
-      });
+      );
     });
   } else {
     return res.json({ message: "User Not Found 😞", isSuccess: false });
