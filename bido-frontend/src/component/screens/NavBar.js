@@ -9,7 +9,7 @@ import {
   Button,
 } from "react-bootstrap";
 import Swal from "sweetalert2";
-import axios from "axios"
+import axios from "axios";
 
 export default function NavBar() {
   const history = useHistory();
@@ -61,37 +61,33 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link>
-                <Link
-                  to="/home"
-                  style={{ color: "wheat", textDecoration: "none" }}
-                >
-                  Home
-                </Link>
+              <Nav.Link
+                as={Link}
+                to="/home"
+                style={{ color: "wheat", textDecoration: "none" }}
+              >
+                Home
               </Nav.Link>
-              <Nav.Link>
-                <Link
-                  to="/Profile"
-                  style={{ color: "wheat", textDecoration: "none" }}
-                >
-                  Profile
-                </Link>
+              <Nav.Link
+                as={Link}
+                to="/Profile"
+                style={{ color: "wheat", textDecoration: "none" }}
+              >
+                Profile
               </Nav.Link>
-              <Nav.Link>
-                <Link
-                  to="/liveBid"
-                  style={{ color: "wheat", textDecoration: "none" }}
-                >
-                  Live Bids
-                </Link>
+              <Nav.Link
+                as={Link}
+                to="/liveBid"
+                style={{ color: "wheat", textDecoration: "none" }}
+              >
+                Live Bids
               </Nav.Link>
-              <Nav.Link>
-                <Link
-                  to="/addBids"
-                  style={{ color: "wheat", textDecoration: "none" }}
-                >
-                  Add Bids
-                </Link>
+              <Nav.Link
+                as={Link}
+                to="/addBids"
+                style={{ color: "wheat", textDecoration: "none" }}
+              >
+                Add Bids
               </Nav.Link>
               <NavDropdown title="Bids" id="collasible-nav-dropdown">
                 <NavDropdown.Item>
@@ -148,11 +144,6 @@ export default function NavBar() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            {/* <Nav>
-              <Nav.Link href="https://github.com/Thakurking/bido">
-                <GitHubIcon />
-              </Nav.Link>
-            </Nav> */}
             <Nav>
               <ButtonGroup className="ml-2">
                 <Button
