@@ -9,8 +9,9 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const createError = require("http-errors");
+const helmet = require("helmet");
 require("./helper/redis_helper");
-
+app.use(helmet());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 

@@ -21,6 +21,13 @@ export default function bottomNavBar() {
           >
             About Us
           </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/review"
+            style={{ color: "wheat", textDecoration: "none" }}
+          >
+            Reviews
+          </Nav.Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
