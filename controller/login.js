@@ -50,14 +50,14 @@ exports.login = async (req, res) => {
       payload.user = isUser._id;
       if (isUser.role === "client") payload.client = true;
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
-        expiresIn: "40s",
+        expiresIn: "8h",
       });
       const user_id = isUser._id;
       client.SET(
         JSON.stringify(user_id),
         JSON.stringify(token),
         "EX",
-        40,
+        28800,
         (err, reply) => {
           if (err) {
             return res.json({
