@@ -35,3 +35,5 @@ And can view other clients live post and bids.
 This application uses Node.js for backend React.js for frontend and Express.js for node framework And MongoDB for database and also socket.IO for real time bidding and using Redis for middleware authentication and authorization and role based auth. Axios for front-end to back-end communication
 # Developer
 Bharat Software Systems
+#Contact
+riteshkumar3310@gmail.com
