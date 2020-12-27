@@ -82,7 +82,7 @@ const PostNavigation = () => {
       <Container fluid="md" className="justify-center border homeContainer">
         <Row>
           <Col>
-            <Nav variant="pills">
+            <Nav>
               <Nav.Item>
                 <Nav.Link eventKey="link-1" onClick={() => FetchCatering(1)}>
                   Catering
