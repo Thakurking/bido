@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Nav, Button } from "react-bootstrap";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../../App.css";
 
 const PostNavigation = () => {
@@ -79,7 +79,7 @@ const PostNavigation = () => {
   };
   return (
     <div>
-      <Container fluid="md" className="justify-center border homeContainer">
+      <Container fluid="md" className="justify-center homeContainer">
         <Row>
           <Col>
             <Nav>
