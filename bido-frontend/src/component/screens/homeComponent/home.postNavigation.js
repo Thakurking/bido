@@ -79,7 +79,7 @@ const PostNavigation = () => {
   };
   return (
     <div>
-      <Container fluid="md" className="justify-center homeContainer">
+      <Container fluid="md" className="justify-center border homeContainer">
         <Row>
           <Col>
             <Nav>
