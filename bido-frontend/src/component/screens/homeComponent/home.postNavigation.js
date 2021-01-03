@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../../App.css";
 
 const PostNavigation = () => {
+  const [loading, setLoading] = useState(false);
+  const [catering, setCatering] = useState([]);
   const FetchCatering = (cat) => {
     axios
       .get("/showAllPost", {
@@ -18,6 +20,10 @@ const PostNavigation = () => {
       })
       .then((res) => {
         console.log(res);
+        if(res.data.isSuccess){
+          setLoading(true)
+          setCatering(res.data.catering);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -112,6 +118,9 @@ const PostNavigation = () => {
             </Nav>
           </Col>
         </Row>
+      </Container>
+      <Container fluid="sm" className="justify-center border">
+
       </Container>
     </div>
   );
