@@ -6,6 +6,7 @@ import Login from "./component/screens/login";
 import Signup from "./component/screens/signup";
 import Home from "./component/screens/home";
 import LiveBid from "./component/screens/liveBid";
+import AddPost from "./component/screens/navBarComponent/navBar.AddPost"
 
 import Protected from "./component/protectedRoutes/protectedRoutes";
 
@@ -24,6 +25,7 @@ export default function App() {
         </Route>
         <Protected exact path="/home" component={Home} />
         <Protected exact path="/liveBid" component={LiveBid} />
+        <Protected exact path="/addPost" component={}
       </Router>
     </>
   );
