@@ -84,10 +84,10 @@ export default function NavBar() {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/addBids"
+                to="/addPost"
                 style={{ color: "wheat", textDecoration: "none" }}
               >
-                Add Bids
+                Add Post
               </Nav.Link>
               <NavDropdown title="Bids" id="collasible-nav-dropdown">
                 <NavDropdown.Item>
