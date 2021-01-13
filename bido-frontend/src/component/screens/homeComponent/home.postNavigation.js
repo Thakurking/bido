@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import { Container, Row, Col, Nav, Spinner } from "react-bootstrap";
 import "../../../App.css";
 
 const PostNavigation = () => {
-  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [catering, setCatering] = useState([]);
+  const [loadCatering, setLoadCatering] = useState(false);
+  const [shipping, setShipping] = useState([""]);
+  const [loadShipping, setLoadShopping] = useState(false);
+  const [interiorDesign, setInteriorDesign] = useState([""]);
+  const [loadInteriorDesign, setLoadInteriorDesign] = useState(false);
+  const [construction, setConstruction] = useState([""]);
+  const [loadConstruction, setLoadConstruction] = useState(false);
+
   const FetchCatering = (cat) => {
     axios
       .get("/showAllPost", {
@@ -19,10 +27,11 @@ const PostNavigation = () => {
         },
       })
       .then((res) => {
-        console.log(res);
-        if(res.data.isSuccess){
-          setLoading(true)
+        console.log(res.data.catering);
+        if (res.data.isSuccess) {
+          setLoadCatering(true);
           setCatering(res.data.catering);
+          setMessage(res.data.message);
         }
       })
       .catch((err) => {
@@ -41,7 +50,12 @@ const PostNavigation = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        if (res.data.isSuccess) {
+          setLoadShopping(true);
+          setShipping(res.data.shipping);
+          setMessage(res.data.message);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +73,10 @@ const PostNavigation = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setLoadInteriorDesign(true);
+        setInteriorDesign(res.data.interiorDesign);
+        setMessage(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -77,7 +94,10 @@ const PostNavigation = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setLoadConstruction(true);
+        setConstruction(res.data.construction);
+        setMessage(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -120,7 +140,52 @@ const PostNavigation = () => {
         </Row>
       </Container>
       <Container fluid="sm" className="justify-center border">
-
+        <h3>{message}</h3>
+        {loadCatering ? (
+          catering.map((caterings) => {
+            return (
+              <div>
+                <h5>{caterings.postedBy}</h5>
+                <h5>{caterings.catering.items}</h5>
+              </div>
+            );
+          })
+        ) : (
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )}
+        {loadShipping ? (
+          shipping.map((shippings) => {
+            return (
+              <div>
+                <h5>{shippings.postedBy}</h5>
+              </div>
+            );
+          })
+        ) : (
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )}
+        {loadInteriorDesign ? (
+          interiorDesign.map((interiorDesigns) => (
+            <div>{interiorDesigns.notes}</div>
+          ))
+        ) : (
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )}
+        {loadConstruction ? (
+          construction.map((constructions) => (
+            <div>{constructions.construction}</div>
+          ))
+        ) : (
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )}
       </Container>
     </div>
   );

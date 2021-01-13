@@ -20,7 +20,7 @@ exports.showAllPost = async (req, res) => {
       return res.json({
         message: "Showing Post For Catering",
         isSuccess: true,
-        data: catering,
+        catering,
       });
     } else {
       return res.json({
@@ -37,7 +37,7 @@ exports.showAllPost = async (req, res) => {
       return res.json({
         message: "Showing Post For Shipping",
         isSuccess: true,
-        data: shipping,
+        shipping,
       });
     } else {
       return res.json({
@@ -54,7 +54,7 @@ exports.showAllPost = async (req, res) => {
       return res.json({
         message: "Showing Post For Interior Design",
         isSuccess: true,
-        data: interiorDesign,
+        interiorDesign,
       });
     } else {
       return res.json({
@@ -71,7 +71,7 @@ exports.showAllPost = async (req, res) => {
       return res.json({
         message: "Showing Post For Construction",
         isSuccess: true,
-        data: construction,
+        construction,
       });
     } else {
       return res.json({

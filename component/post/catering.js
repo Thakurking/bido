@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
   const isStatus = await User.findOne({ _id: postedBy });
   if (!isStatus.address) {
     return res.json({
-      Error: "Please AddAddress And Update Your Profile First",
+      Error: "Please Add Address And Update Your Profile First",
       isSuccess: false,
     });
   }
@@ -65,6 +65,7 @@ module.exports = async (req, res) => {
     catering,
     postedBy: req.user,
     category: req.body.cat,
+    
   });
   console.log(savePost);
   if (savePost) {
