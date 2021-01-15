@@ -6,7 +6,7 @@ import "../../../App.css";
 
 const PostNavigation = () => {
   const [message, setMessage] = useState("");
-  const [catering, setCatering] = useState([]);
+  const [catering, setCatering] = useState([""]);
   const [loadCatering, setLoadCatering] = useState(false);
   const [shipping, setShipping] = useState([""]);
   const [loadShipping, setLoadShopping] = useState(false);
