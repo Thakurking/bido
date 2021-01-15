@@ -35,8 +35,6 @@ module.exports = async (req, res, next) => {
         console.log(err.message);
         return res.json({ message: "somethign went wrong", isSuccess: false });
       }
-      console.log("ritesh");
-      console.log(data);
       if (data) {
         req.user = user_id;
         req.client = true;

@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 
