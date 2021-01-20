@@ -32,7 +32,7 @@ and there location of the construction site.
 Clients can bid live on the bid section on other clients post on different services.
 And can view other clients live post and bids.
 # Tools and Technologies
-This application uses Node.js for backend React.js for frontend and Express.js for node framework And MongoDB for database and also socket.IO for real time bidding and using Redis for middleware authentication and authorization and role based auth. Axios for front-end to back-end communication and also using rest HTTP
+This application uses Node.js for backend React.js for frontend and Express.js for node framework And MongoDB for database and also socket.IO for real time bidding and using Redis for middleware authentication and authorization and role based auth. Axios for front-end to back-end communication and also using rest HTTP and Context in react for state management
 # Developer
 Bharat Software Systems
 #Contact
