@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
         JSON.stringify(user_id),
         JSON.stringify(token),
         "EX",
-        28800,
+        90 * 24 * 60 * 60,
         (err, reply) => {
           if (err) {
             return res.json({
@@ -70,9 +70,7 @@ exports.login = async (req, res) => {
           return res.json({
             message: "Login Successful 🚀",
             isSuccess: true,
-            User,
             user_id: isUser._id,
-            token,
           });
         }
       );
