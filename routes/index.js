@@ -13,6 +13,7 @@ const profileUpdateController = require("../controller/updateProfile");
 const deletePost = require("../controller/deletePost");
 const todayAcceptedBids = require("../controller/todayAcceptedBids");
 const deleteRedisAuth = require("../controller/delete_Redis_Auth");
+const addPostCategory = require("../controller/addPostCategory");
 
 //User JWT Middleware
 const isUser = require("../middleware/userAuth");
@@ -93,6 +94,10 @@ router.get("/todayBids", isUser, todayAcceptedBids.todayBids);
 
 //#region Delete Redis Authentication for client
 router.post("/deleteRedisAuth", deleteRedisAuth.deleteRedisAuth);
+//#endregion
+
+//#region Add Post Category
+router.post("/addPostCategory", addPostCategory.addPostCategory);
 //#endregion
 
 module.exports = router;
