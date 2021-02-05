@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "0px",
     marginTop: "15%",
-    marginBottom: "15%",
   },
   // paper: {
   //   padding: theme.spacing(2),
@@ -30,10 +29,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
     borderRadius: "10px",
-    border: "none"
+    border: "none",
+  },
+  cardAction: {
+    backgroundColor: "#343a40",
+  },
+  cardButton: {
+    backgroundColor: "wheat",
   },
   media: {
-    height: 100,
+    height: 80,
   },
 }));
 
@@ -51,7 +56,7 @@ const PostNavigation = () => {
                   <CardMedia
                     className={classes.media}
                     image="/static/images/cards/contemplative-reptile.jpg"
-                    title="Contemplative Reptile"
+                    title="Catering Services"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -68,8 +73,12 @@ const PostNavigation = () => {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
+                <CardActions className={classes.cardAction}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    className={classes.cardButton}
+                  >
                     View More
                   </Button>
                 </CardActions>
@@ -81,7 +90,7 @@ const PostNavigation = () => {
                   <CardMedia
                     className={classes.media}
                     image="/static/images/cards/contemplative-reptile.jpg"
-                    title="Contemplative Reptile"
+                    title="Shipping Services"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -98,8 +107,12 @@ const PostNavigation = () => {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
+                <CardActions className={classes.cardAction}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    className={classes.cardButton}
+                  >
                     View More
                   </Button>
                 </CardActions>
@@ -111,7 +124,7 @@ const PostNavigation = () => {
                   <CardMedia
                     className={classes.media}
                     image="/static/images/cards/contemplative-reptile.jpg"
-                    title="Contemplative Reptile"
+                    title="Construction Services"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -128,8 +141,12 @@ const PostNavigation = () => {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
+                <CardActions className={classes.cardAction}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    className={classes.cardButton}
+                  >
                     View More
                   </Button>
                 </CardActions>
@@ -141,11 +158,11 @@ const PostNavigation = () => {
                   <CardMedia
                     className={classes.media}
                     image="/static/images/cards/contemplative-reptile.jpg"
-                    title="Contemplative Reptile"
+                    title="Interior Design Services"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                      interior Design
+                      Interior Design
                     </Typography>
                     <Typography
                       variant="body2"
@@ -158,8 +175,12 @@ const PostNavigation = () => {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
+                <CardActions className={classes.cardAction}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    className={classes.cardButton}
+                  >
                     View More
                   </Button>
                 </CardActions>

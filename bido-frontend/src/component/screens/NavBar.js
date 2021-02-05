@@ -8,6 +8,7 @@ import {
   ButtonGroup,
   Button,
 } from "react-bootstrap";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -143,6 +144,9 @@ export default function NavBar() {
                   </Link>
                 </NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link href="https://github.com/Thakurking/bido">
+                <GitHubIcon />
+              </Nav.Link>
             </Nav>
             <Nav>
               <ButtonGroup className="ml-2">
