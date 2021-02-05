@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     width: "100%",
     margin: "0px",
-    marginTop: "15%",
+    marginBottom: "3%"
   },
   // paper: {
   //   padding: theme.spacing(2),
@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 80,
   },
+  heading: {
+    marginTop: "15%"
+  }
 }));
 
 const PostNavigation = () => {
@@ -49,6 +52,9 @@ const PostNavigation = () => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="lg">
+          <Typography variant="h3" gutterBottom className={classes.heading}>
+            Services.
+          </Typography>
           <Grid container spacing={2} className={classes.grid}>
             <Grid item xs={12} md={6}>
               <Card className={classes.root}>
