@@ -21,14 +21,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "15%",
     marginBottom: "15%",
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    backgroundColor: "#343a40",
-  },
+  // paper: {
+  //   padding: theme.spacing(2),
+  //   textAlign: "center",
+  //   backgroundColor: "#343a40",
+  // },
   //Card Inside Paper
   root: {
     maxWidth: "100%",
+    borderRadius: "10px",
+    border: "none"
   },
   media: {
     height: 100,
@@ -68,10 +70,7 @@ const PostNavigation = () => {
                 </CardActionArea>
                 <CardActions>
                   <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    Learn More
+                    View More
                   </Button>
                 </CardActions>
               </Card>
@@ -101,10 +100,7 @@ const PostNavigation = () => {
                 </CardActionArea>
                 <CardActions>
                   <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    Learn More
+                    View More
                   </Button>
                 </CardActions>
               </Card>
@@ -134,10 +130,7 @@ const PostNavigation = () => {
                 </CardActionArea>
                 <CardActions>
                   <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    Learn More
+                    View More
                   </Button>
                 </CardActions>
               </Card>
@@ -167,10 +160,7 @@ const PostNavigation = () => {
                 </CardActionArea>
                 <CardActions>
                   <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    Learn More
+                    View More
                   </Button>
                 </CardActions>
               </Card>
