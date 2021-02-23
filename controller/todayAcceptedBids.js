@@ -19,6 +19,8 @@ exports.todayBids = async (req, res) => {
       isSuccess: true,
       bids: showBids,
     });
+  } else {
+    return res.json({ message: "No Bids Have Made Today", isSuccess: true });
   }
   return res.json({ message: "No Bids Found Today", isSuccess: false });
 };

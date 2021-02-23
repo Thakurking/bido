@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Card, Button, Form } from "react-bootstrap";
 import axios from "axios";
@@ -13,7 +13,6 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [cpassword, setPass] = useState("");
   const [active, setActive] = useState("");
-
   const toast = Swal.mixin({
     toast: true,
     position: "top",
@@ -29,7 +28,7 @@ const Signup = () => {
   const postData = () => {
     axios
       .post("/signup", {
-        name, 
+        name,
         email,
         phone,
         password,
@@ -46,7 +45,7 @@ const Signup = () => {
           setActive(true);
         }
         if (res.data.isOTP) {
-          setActive(true)
+          setActive(true);
           localStorage.setItem("userId", res.data.userId);
           toast.fire({
             icon: "success",
@@ -153,7 +152,7 @@ const Signup = () => {
             </Link>
           </Card.Footer>
         </Card>
-        {active ?  <OtpPage /> : null}
+        {active ? <OtpPage /> : null}
       </Container>
     </>
   );
