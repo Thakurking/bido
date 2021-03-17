@@ -4,4 +4,6 @@ const bcrypt = require("bcrypt");
 
 const User = require("../../model/user");
 
-exports.adminSignup = async (req, res) => {};
+exports.admin_Signup_Request = async (req, res) => {
+
+};

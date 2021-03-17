@@ -102,9 +102,7 @@ router.post("/addPostCategory", addPostCategory.addPostCategory);
 //#endregion
 
 //#region Signup For Admin
-router.post("/adminSignup", adminSignup.adminSignup);
+router.post("/admin_Signup_Request", adminSignup.admin_Signup_Request);
 //#endregion
-
-
 
 module.exports = router;
