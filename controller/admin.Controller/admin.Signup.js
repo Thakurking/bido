@@ -46,7 +46,7 @@ exports.admin_Signup_Request = async (req, res) => {
             email: ID,
             password: PASSWORD,
             phone: PHONE,
-            role: "Admin",
+            role: "admin",
             name: NAME,
             referalCode: uuidv4(),
           });
