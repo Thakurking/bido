@@ -15,6 +15,7 @@ const todayAcceptedBids = require("../controller/todayAcceptedBids");
 const deleteRedisAuth = require("../controller/delete_Redis_Auth");
 const addPostCategory = require("../controller/addPostCategory");
 const adminSignup = require("../controller/admin.Controller/admin.Signup");
+const adminLogin = require("../controller/admin.Controller/admin.Login");
 
 //User JWT Middleware
 const isUser = require("../middleware/userAuth");
@@ -103,6 +104,10 @@ router.post("/addPostCategory", addPostCategory.addPostCategory);
 
 //#region Signup For Admin
 router.post("/admin_Signup_Request", adminSignup.admin_Signup_Request);
+//#endregion
+
+//#region Login For Admin
+router.post("/adminLogin", adminLogin.adminLogin);
 //#endregion
 
 module.exports = router;
