@@ -22,6 +22,10 @@ module.exports = async (req, res, next) => {
     //     req.client = true;
     //     req.user = payload.user;
     //     next();
+    //   } else if (payload.admin && payload.user) {
+    //     req.isAdmin = true;
+    //     req.admin = payload.user;
+    //     next();
     //   } else {
     //     return res.json({ message: "Not Authorized", isSuccess: false });
     //   }
